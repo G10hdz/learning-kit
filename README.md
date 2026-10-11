@@ -42,6 +42,8 @@ Requisitos por pieza en `REQUIREMENTS.md`. Las dos rutas mas cortas:
 
 - El piso de coaching (ai-coach): tiene estado personal, no se comparte. El
   `bundle.sh` de surface lo detecta si existe al lado y lo integra solo.
+- El backbone `ai-memory` (MCP de memoria): pieza propia, fuera del repo.
+  `memory/vault_sync.py` es opcional y `memory/embeddings/` funciona sin el.
 - Datos: catalogs, vaults, decks propios y configs reales estan fuera o como
   `*.example`. Trae tus libros y tus notas.
 - Un daemon central: cada piso es un proceso chico que se entiende solo.

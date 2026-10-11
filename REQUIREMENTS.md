@@ -11,11 +11,28 @@ captions opcionales.
 | `acquisition/` | Python >= 3.11 + uv/pip | fastapi, uvicorn, httpx, youtube-transcript-api | `live`: yt-dlp; `books`: PyMuPDF, ebooklib; TranscriptAPI key |
 | `production/` | bash + Python 3 + `nlm` | `nlm` CLI + cuenta Google NotebookLM | pdflatex (PDFs), Calibre CWA via `CALIBRE_HOST` |
 | `practice/` | nada (HTML/JS estatico) | navegador | node para los scripts de validacion |
-| `memory/` | Python 3 stdlib | un servidor `ai-memory` MCP | Obsidian (el vault es solo una carpeta) |
+| `memory/` | Python 3 stdlib | — | un CLI `ai-memory` (backbone MCP propio, opcional); Obsidian = solo una carpeta |
 | `memory/embeddings/` | Python 3 + chromadb | `ollama pull bge-m3` u `OPENROUTER_API_KEY` | — |
 | `surface/` | bash, python3 | tailscale (para publicar en tailnet) | node + player pr-explainer (explainers) |
 
 ---
+
+## Dependencias externas (links oficiales)
+
+Todo lo que el kit referencia es publico y cada quien instala su copia:
+
+| Pieza | Para que | Link / install |
+| --- | --- | --- |
+| Python >= 3.11 | todo el kit | python.org |
+| `uv` | venvs + instalar CLIs | `curl -LsSf https://astral.sh/uv/install.sh \| sh` |
+| `nlm` | NotebookLM: libretas, audio, flashcards, quiz | [gemini-notebook-mcp-cli](https://github.com/jacob-bd/gemini-notebook-mcp-cli) — `uv tool install notebooklm-mcp-cli` |
+| Ollama + `bge-m3` | embeddings locales de `memory/embeddings/` | ollama.com — `ollama pull bge-m3` |
+| ChromaDB | store vectorial | viene en `memory/embeddings/requirements.txt` |
+| Obsidian | leer/escribir el vault | obsidian.md (opcional: el vault es solo una carpeta) |
+| Tailscale | servir `surface/` en tu red | tailscale.com (opcional) |
+| Calibre Web (CWA) | conversion + Kindle | github.com/janeczku/calibre-web (opcional) |
+| pdflatex | PDFs en `production/` | mactex / texlive (opcional) |
+| node | validar decks de `practice/` | nodejs.org (opcional) |
 
 ## Base (una sola vez)
 
@@ -98,6 +115,12 @@ python3 -m http.server -d practice 8000
 - Spec del scheduler: `specs/fsrs-scheduling.md`.
 
 ## memory/ — vault-sync
+
+**Opcional.** `vault_sync.py` escribe en un backbone de memoria via el CLI
+`ai-memory` (`ai-memory store` con namespaces por lane). Ese CLI es una pieza
+propia fuera del kit: si no lo tienes, este piso se omite y `embeddings/`
+funciona standalone. Cualquier binario con esa interfaz sirve; el kit no
+distribuye uno.
 
 ```sh
 mkdir -p ~/.config/vault-sync
