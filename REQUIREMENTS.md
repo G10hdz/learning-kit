@@ -48,6 +48,10 @@ uv pip install -e '.[books]'            # + epub/pdf de libros
   resto funciona igual.
 - `TRANSCRIPT_API_KEY` — provider de captions en live (evita el IP ban de
   YouTube). `.env.example` -> `.env`.
+- **Resolvers plugin**: `.py` en `~/.config/founder-guide/resolvers/` (o
+  `$FOUNDER_GUIDE_RESOLVER_DIR`). Ejemplo incluido: `plugins/libgen.py`
+  genera el link de busqueda en LibGen para el paso humano — la descarga es
+  manual por diseño (ver `plugins/README.md`).
 - Tests: `.venv/bin/python -m unittest discover -s tests -v`.
 
 ## production/ — capital-cultural
