@@ -12,6 +12,7 @@ captions opcionales.
 | `production/` | bash + Python 3 + `nlm` | `nlm` CLI + cuenta Google NotebookLM | pdflatex (PDFs), Calibre CWA via `CALIBRE_HOST` |
 | `practice/` | nada (HTML/JS estatico) | navegador | node para los scripts de validacion |
 | `memory/` | Python 3 stdlib | un servidor `ai-memory` MCP | Obsidian (el vault es solo una carpeta) |
+| `memory/embeddings/` | Python 3 + chromadb | `ollama pull bge-m3` u `OPENROUTER_API_KEY` | — |
 | `surface/` | bash, python3 | tailscale (para publicar en tailnet) | node + player pr-explainer (explainers) |
 
 ---
@@ -29,6 +30,11 @@ nlm doctor         # verifica
 ```
 
 `install.sh` verifica todo esto solo (`./install.sh check`).
+
+Comandos de estudio que ya trae `nlm` (ver `docs/playbook-estudio.md`):
+`nlm audio create` (audiolibro), `nlm flashcards create`, `nlm quiz create`,
+`nlm mindmap create`, `nlm report create` (study guide), `nlm download`
+(baja los artefactos), `nlm research` (descubre fuentes).
 
 ## acquisition/ — founder-guide
 
@@ -104,6 +110,21 @@ python3 memory/vault_sync.py
 - Config vive en `~/.config/vault-sync/config.json`, estado en
   `~/.cache/vault-sync/state.json`.
 - Tests: `python3 -m unittest memory/tests/test_vault_sync.py` (stdlib).
+
+### embeddings/ — busqueda semantica del vault
+
+```sh
+cd memory/embeddings
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+cp .env.example .env          # VAULT_PATHS con tus vaults
+ollama pull bge-m3
+.venv/bin/python index_vaults.py --full      # indexa
+.venv/bin/python index_vaults.py --search "idea que no recuerdas donde escribiste"
+.venv/bin/python index_vaults.py --update    # incremental por SHA256
+```
+
+Providers: `ollama` (local, bge-m3) u `openrouter` (nube, API key). Cada uno
+en su coleccion ChromaDB propia.
 
 ## surface/ — hub web en tu tailnet
 
