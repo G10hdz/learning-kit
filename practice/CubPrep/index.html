@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CubPrep | UNAM Area 1</title>
+  <link rel="icon" href="../favicon.ico" sizes="any">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../shared/engine.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <a href="../index.html" class="back-home-link">← Hypatia</a>
+        <h1><a href="../index.html">CubPrep</a></h1>
+        <p>Bloques cortos, feedback inmediato y reportes de gaps para preparar UNAM Area 1.</p>
+      </div>
+      <a href="study-guide.html" class="study-guide-link" title="Guía de Estudio con Videos" target="_blank">📚 Guía</a>
+      <div id="topbar-avatar" class="topbar-avatar" title="Tu avatar" aria-hidden="true">🐱</div>
+      <div class="points-chip">
+        <small>Puntos totales</small>
+        <strong id="top-total-points">0</strong>
+        <div class="chip-row">
+          <span id="top-streak-pill" class="chip-pill">Racha 0</span>
+          <span id="top-best-pill" class="chip-pill">Mejor 0</span>
+        </div>
+      </div>
+      <div class="target-chip">
+        <small>Meta Ing. Computacion (FI)</small>
+        <strong id="target-score">--</strong>
+        <div class="target-bar">
+          <div id="target-bar-fill" class="target-bar-fill low"></div>
+        </div>
+        <div class="chip-row">
+          <span id="target-label" class="chip-pill">Completa un bloque</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="home-screen" class="screen active">
+        <div class="grid">
+          <article class="panel summary-panel">
+            <h2>Tu progreso</h2>
+            <p>Estadisticas guardadas en localStorage para retomar donde te quedaste.</p>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <span>Racha actual</span>
+                <strong id="stat-streak">0</strong>
+              </div>
+              <div class="stat-card">
+                <span>Total respondidas</span>
+                <strong id="stat-answered">0</strong>
+              </div>
+              <div class="stat-card">
+                <span>Precision global</span>
+                <strong id="stat-accuracy">0%</strong>
+              </div>
+            </div>
+            <div id="onboarding-nudge" class="onboarding-nudge" style="display:none;">
+              <h4>¡Tu primer bloque te espera! 🚀</h4>
+              <p>Elige un modo de estudio a la derecha y presiona <strong>Iniciar</strong>. Tus estadísticas y gaps aparecerán aquí automáticamente.</p>
+            </div>
+
+            <!-- Avatar picker -->
+            <div style="margin-top:16px;">
+              <small style="color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-size:0.7rem;">Tu avatar</small>
+              <div id="avatar-picker" class="avatar-picker"></div>
+
+              <!-- Custom avatar creator -->
+              <div id="custom-avatar-creator" class="custom-avatar-creator" style="display:none;">
+                <h4>✨ Crear avatar personalizado</h4>
+                <div class="custom-avatar-controls">
+                  <input id="custom-avatar-emoji" class="emoji-input" type="text" maxlength="2" value="🐱" placeholder="🐱">
+                  <input id="custom-avatar-name" class="name-input" type="text" maxlength="20" placeholder="Nombre de tu avatar">
+                  <button id="randomize-name-btn" class="randomize-btn" type="button">🎲 Aleatorio</button>
+                  <button id="apply-custom-avatar-btn" class="apply-avatar-btn" type="button">Aplicar</button>
+                </div>
+                <!-- Quick emoji grid -->
+                <div id="emoji-grid" class="emoji-grid"></div>
+              </div>
+
+              <button id="toggle-custom-avatar-btn" class="toggle-btn" style="margin-top:10px;" type="button">+ Crear personalizado</button>
+            </div>
+
+            <div id="trend-section" style="margin-top:14px;display:none;">
+              <small style="color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-size:0.7rem;">Tendencia (ultimos 5 bloques)</small>
+              <div id="trend-bars" style="display:flex;gap:4px;align-items:flex-end;height:32px;margin-top:6px;"></div>
+              <div id="trend-values" style="display:flex;gap:4px;margin-top:4px;"></div>
+            </div>
+            <div id="weakness-section" style="margin-top:14px;display:none;">
+              <small style="color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-size:0.7rem;">Temas debiles</small>
+              <ul id="weakness-list" class="list" style="margin-top:6px;"></ul>
+            </div>
+
+            <!-- Gap visualization by subject -->
+            <div id="gap-section" style="margin-top:16px;display:none;">
+              <small style="color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-size:0.7rem;">Precision por materia</small>
+              <div id="gap-chart" class="gap-chart"></div>
+            </div>
+
+            <!-- Study recommendations -->
+            <div id="recommendations-section" style="margin-top:16px;display:none;">
+              <small style="color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-size:0.7rem;">Recomendaciones de estudio</small>
+              <div id="recommendations-list"></div>
+            </div>
+
+            <div id="mock-section" style="margin-top:14px;display:none;">
+              <small style="color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-size:0.7rem;">Simulacros de examen (meta: 105)</small>
+              <div id="mock-bars" style="display:flex;gap:6px;align-items:flex-end;height:48px;margin-top:6px;position:relative;"></div>
+              <div id="mock-values" style="display:flex;gap:6px;margin-top:4px;"></div>
+            </div>
+          </article>
+
+          <article class="panel start-panel">
+            <h3>Como practicar</h3>
+            <p>Elige tu modo de estudio. El examen real de Area 1 tiene ~120 preguntas mezcladas.</p>
+
+            <div class="mode-cards">
+              <div class="mode-card" data-mode="subject">
+                <h4>📚 Bloque por materia</h4>
+                <p>15 preguntas de un solo tema. Ideal para reforzar areas especificas.</p>
+                <span class="mode-badge blue">Enfoque</span>
+              </div>
+              <div class="mode-card" data-mode="topic">
+                <h4>🎯 Tema especifico</h4>
+                <p>Practica solo algebra, solo cinematica, solo gramatica...</p>
+                <span class="mode-badge green">Precision</span>
+              </div>
+              <div class="mode-card" data-mode="mock">
+                <h4>📝 Simulacro de examen</h4>
+                <p>120 preguntas, 3 horas. Simula las condiciones reales del UNAM.</p>
+                <span class="mode-badge pink">Examen real</span>
+              </div>
+              <div class="mode-card" data-mode="review">
+                <h4>🔄 Repasar errores</h4>
+                <p>Las preguntas que fallaste antes, priorizadas por spaced repetition.</p>
+                <span class="mode-badge yellow" id="review-count-badge">0 pendientes</span>
+              </div>
+            </div>
+
+            <!-- Subject selector for mode "subject" -->
+            <form id="start-form" style="margin-top:12px;">
+              <div id="subject-select-area">
+                <label>
+                  Materia
+                  <select id="start-materia" required></select>
+                </label>
+                <!-- Topic chips appear here when a subject is selected -->
+                <div id="topic-filter-area" class="topic-chips" style="margin-top:8px;"></div>
+              </div>
+
+              <button type="submit" class="btn-primary" style="margin-top:10px;">Iniciar bloque (15 preguntas)</button>
+            </form>
+
+            <div id="start-status" class="status">Selecciona un modo para comenzar.</div>
+          </article>
+
+          <article class="panel subject-panel">
+            <h3>Desglose por materia</h3>
+            <div id="subject-stats" class="subject-grid"></div>
+          </article>
+
+          <article class="panel history-panel">
+            <h3>Historial reciente</h3>
+            <div id="history-list" class="history-grid"></div>
+          </article>
+
+          <article class="panel custom-panel">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+              <h3 style="margin:0;">Agregar pregunta personalizada</h3>
+              <button id="toggle-custom-form" type="button" class="toggle-btn" aria-expanded="false">+ Agregar</button>
+            </div>
+            <div id="custom-form-body" style="display:none;margin-top:10px;animation:slide-up-in 320ms var(--ease-out-quart) both;">
+            <p>Cada pregunta debe tener explicacion. Se guarda en localStorage y se suma al banco.</p>
+            <form id="custom-question-form">
+              <div class="form-row">
+                <label>
+                  Materia
+                  <select id="custom-materia" required></select>
+                </label>
+                <label>
+                  Tema
+                  <input id="custom-tema" type="text" maxlength="40" required placeholder="ej. algebra">
+                </label>
+              </div>
+              <div class="form-row">
+                <label>
+                  Dificultad (1-3)
+                  <select id="custom-dificultad" required>
+                    <option value="1">1 - Facil</option>
+                    <option value="2" selected>2 - Media</option>
+                    <option value="3">3 - Dificil</option>
+                  </select>
+                </label>
+                <label>
+                  Correcta (0-3)
+                  <select id="custom-correcta" required>
+                    <option value="0">0 (opcion A)</option>
+                    <option value="1">1 (opcion B)</option>
+                    <option value="2">2 (opcion C)</option>
+                    <option value="3">3 (opcion D)</option>
+                  </select>
+                </label>
+              </div>
+
+              <label>
+                Pregunta
+                <textarea id="custom-pregunta" required placeholder="Escribe una pregunta estilo UNAM"></textarea>
+              </label>
+
+              <div class="form-row">
+                <label>
+                  Opcion A
+                  <input id="custom-op-a" type="text" required>
+                </label>
+                <label>
+                  Opcion B
+                  <input id="custom-op-b" type="text" required>
+                </label>
+              </div>
+              <div class="form-row">
+                <label>
+                  Opcion C
+                  <input id="custom-op-c" type="text" required>
+                </label>
+                <label>
+                  Opcion D
+                  <input id="custom-op-d" type="text" required>
+                </label>
+              </div>
+
+              <label>
+                Explicacion
+                <textarea id="custom-explicacion" required placeholder="Por que esa es la opcion correcta"></textarea>
+              </label>
+
+              <label>
+                Analisis de distractores (opcional, uno por linea, formato: "B|razon")
+                <textarea id="custom-distractores" placeholder="B|No aplica porque...&#10;C|Este seria el resultado si...&#10;D|Confunde el concepto con..."></textarea>
+              </label>
+
+              <label>
+                Tip (opcional)
+                <input id="custom-tip" type="text" placeholder="Atajo o pista para recordar">
+              </label>
+
+              <button type="submit" class="btn-secondary">Guardar pregunta</button>
+            </form>
+            <div id="custom-status" class="status">Tus preguntas personalizadas se incluyen en nuevos bloques.</div>
+            </div><!-- /custom-form-body -->
+          </article>
+        </div>
+      </section>
+
+      <section id="quiz-screen" class="screen">
+        <article class="panel">
+          <div style="margin-bottom:12px;">
+            <button id="quiz-back-home-btn" class="btn-secondary" style="width:auto;padding:6px 14px;font-size:0.8rem;" type="button">← Home</button>
+          </div>
+          <div class="quiz-head">
+            <div class="meta-line">
+              <span id="quiz-progress">Pregunta 1 / 15</span>
+              <span id="quiz-materia">Materia</span>
+              <span id="quiz-combo" class="combo">Combo x0</span>
+              <span id="quiz-streak-fire" class="streak-fire" aria-label="Racha actual">🔥 0</span>
+              <div class="timer-container">
+                <div class="timer-ring">
+                  <svg width="32" height="32">
+                    <circle class="timer-ring-bg" cx="16" cy="16" r="13"></circle>
+                    <circle id="timer-ring-fill" class="timer-ring-fill" cx="16" cy="16" r="13"
+                      stroke-dasharray="81.68"
+                      stroke-dashoffset="0"></circle>
+                  </svg>
+                </div>
+                <span class="timer" id="quiz-timer">0s</span>
+                <span id="speed-badge" class="speed-badge" style="display:none;"></span>
+              </div>
+            </div>
+            <div id="quiz-progress-label" class="quiz-progress-label">0 / 0</div>
+            <div class="progress-track">
+              <div id="quiz-progress-fill" class="progress-fill"></div>
+            </div>
+          </div>
+
+          <article id="question-card" class="quiz-card">
+            <div id="question-type-badge" class="question-type-badge" style="display:none;"></div>
+            <h2 id="quiz-question">Pregunta</h2>
+            <div id="learning-objective" class="learning-objective" style="display:none;">
+              <strong>Objetivo de aprendizaje:</strong>
+              <span id="learning-objective-text"></span>
+            </div>
+            <div id="quiz-options" class="options"></div>
+            <p id="quiz-tip" class="tip"></p>
+
+            <div id="quiz-feedback" class="feedback">
+              <h3 id="feedback-title">Feedback</h3>
+              <p id="feedback-message"></p>
+              <p id="feedback-explanation"></p>
+              <small id="feedback-meta"></small>
+
+              <!-- ADHD-friendly: Extended pedagogical feedback -->
+              <div id="explanation-correct-section" class="explanation-section correct-reason" style="display:none;">
+                <h4>¿Por qué es correcta?</h4>
+                <p id="explanation-correct-text"></p>
+              </div>
+
+              <div id="explanation-distractors-section" class="explanation-section distractor-analysis" style="display:none;">
+                <h4>Análisis de distractores</h4>
+                <ul id="explanation-distractors-list"></ul>
+              </div>
+
+              <!-- Video references from NotebookLM -->
+              <div id="video-ref-section" class="explanation-section video-references" style="display:none;">
+                <h4>📹 Aprende más con videos</h4>
+                <div id="video-ref-list"></div>
+              </div>
+
+              <!-- Report wrong answer button -->
+              <div id="report-answer-section" class="report-answer-bar" style="display:none;">
+                <button id="report-answer-btn" class="btn-report">
+                  🚩 ¿Respuesta incorrecta en el banco?
+                </button>
+                <small id="report-answer-status" style="display:none;"></small>
+              </div>
+            </div>
+          </article>
+
+          <div class="quiz-actions">
+            <small class="kbd-hint">Atajos: 1-4 o A-D para responder, Enter para siguiente.</small>
+            <button id="next-question-btn" class="btn-primary" disabled>Siguiente</button>
+          </div>
+        </article>
+      </section>
+
+      <section id="report-screen" class="screen">
+        <article class="panel">
+          <h2>Reporte del bloque</h2>
+          <p id="report-summary">Resumen...</p>
+
+          <div class="report-grid">
+            <div class="report-box">
+              <small>Precision</small>
+              <h3 id="report-accuracy">0%</h3>
+            </div>
+            <div class="report-box">
+              <small>Tiempo promedio</small>
+              <h3 id="report-avg-time">0s</h3>
+            </div>
+            <div class="report-box">
+              <small>Puntos del bloque</small>
+              <h3 id="report-points">0</h3>
+            </div>
+          </div>
+          <div id="report-banner" class="report-banner" style="display:none;"></div>
+
+          <div class="grid">
+            <article class="panel" style="grid-column: span 6;">
+              <h3>Temas con mayor tiempo</h3>
+              <ul id="report-slow-topics" class="list"></ul>
+            </article>
+            <article class="panel" style="grid-column: span 6;">
+              <h3>Temas con mas errores</h3>
+              <ul id="report-wrong-topics" class="list"></ul>
+            </article>
+          </div>
+
+          <div id="topic-breakdown-section" style="display:none;margin-top:16px;">
+            <small style="color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-size:0.7rem;">Por tema — peor a mejor</small>
+            <ul id="topic-breakdown-list" class="list" style="margin-top:8px;"></ul>
+          </div>
+
+          <div class="quiz-actions">
+            <button id="retry-btn" class="btn-secondary">Repetir</button>
+            <button id="back-home-btn" class="btn-primary">Volver al home</button>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="xp-pop" class="xp-pop" aria-hidden="true"></div>
+  <div id="confetti-layer" class="confetti-layer" aria-hidden="true"></div>
+
+  <!-- Questions loader - loads split files by materia -->
+  <script src="./questions_by_materia/matematicas.js"></script>
+  <script src="./questions_by_materia/fisica.js"></script>
+  <script src="./questions_by_materia/quimica.js"></script>
+  <script src="./questions_by_materia/espanol.js"></script>
+  <script src="./questions_by_materia/biologia.js"></script>
+  <script src="./questions_by_materia/literatura.js"></script>
+  <script src="./questions_by_materia/geografia.js"></script>
+  <script src="./questions_by_materia/historia_mx.js"></script>
+  <script src="./questions_by_materia/historia_uni.js"></script>
+  <script src="./questions_by_materia/filosofia.js"></script>
+  <script src="./questions_by_materia/general.js"></script>
+  <script src="./questions_by_materia/loader.js"></script>
+  <script src="./enhanced_explanations.js"></script>
+  <script src="./video_refs.js"></script>
+  <script src="./module.js"></script>
+  <script src="../shared/engine.js"></script>
+
+  <footer style="text-align:center;padding:24px 16px;color:var(--muted);font-size:0.8rem;border-top:1px solid var(--border);margin-top:32px;">
+    Built with love for every neurodivergent mind 🧠✨
+  </footer>
+</body>
+</html>

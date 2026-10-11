@@ -1,0 +1,12 @@
+{
+  "video_id": "demo-founder-001",
+  "language": "es",
+  "url": "https://youtube.com/watch?v=demo-founder-001",
+  "title": "Cómo validar con usuarios (demo)",
+  "cues": [
+    {"start": 0, "duration": 30, "text": "<i>Habla  con usuarios antes de construir.</i>"},
+    {"start": 30, "duration": 30, "text": "Para validar, pregunta por problemas reales."},
+    {"start": 60, "duration": 30, "text": "Vuelve con usuarios y muestra una oferta pequeña."},
+    {"start": 90, "duration": 30, "text": "Puedes validar midiendo compromisos, no cumplidos."}
+  ]
+}

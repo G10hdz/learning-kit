@@ -1,0 +1,277 @@
+% ============================================================
+%  DAILY MULTIDISCIPLINARY BRIEF - PLANTILLA REUSABLE
+% ------------------------------------------------------------
+%  Estilo: deedy ColorTitle (titulo con acento fuerte)
+%        + arXiv/NeurIPS (tipografia limpia, una columna)
+%        + Eisvogel (bloques de codigo)
+%        + problem-sets (ejercicios + solucionario)
+%
+%  COMO USAR:
+%   1. Copia este archivo como AAAA-MM-DD-categoria.tex
+%   2. Rellena los campos marcados con <<...>>
+%   3. Compila:  pdflatex archivo.tex  (dos veces)
+%
+%  ESTRUCTURA FIJA:
+%   1. Panorama del dia   -> contexto + caja "Mapa mental"
+%   2. Resumenes por fuente -> 3-4 temas, cada uno con sourcecard
+%   3. Cuaderno de ejercicios -> \exercise / \question + solucionario
+%   4. Fuentes y citas    -> referencias con DOI/arXiv
+%
+%  LONGITUD: flexible, 2-4 paginas. NO forzar \newpage ni relleno.
+%
+%  ENTORNOS DISPONIBLES:
+%   \begin{sourcecard}{Autores (anio)}{Titulo, venue/arXiv.}  ... \end{sourcecard}
+%   \begin{concept}{Titulo de la caja}  ... \end{concept}
+%   \begin{code}[Lenguaje o etiqueta]   ... \end{code}
+%   \begin{solutions}{Solucionario}      ... \end{solutions}
+%   \begin{intuition}{Titulo}            ... \end{intuition}   (metaforas, "por que importa")
+%   \partdivider{PARTE I \textbullet\ Fundamentos}{Una linea}   (briefs de dos niveles)
+%   \exercise Texto del ejercicio (numera solo)
+%   \question Pregunta de razonamiento (con vineta)
+%
+%  PAQUETES: solo TeX Live base. NO usa babel-spanish, newtx,
+%  sourcesanspro ni fontawesome (pueden no estar instalados).
+%  Escribe el cuerpo SIN acentos o con \'a si hace falta, para
+%  maxima portabilidad entre distribuciones.
+% ============================================================
+
+\documentclass[10pt, letterpaper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=0.75in]{geometry}
+
+% ---------- Tipografia (consistente y legible) ----------
+\usepackage{charter}                 % cuerpo serif calido y legible
+\usepackage{tgheros}                 % sans (TeX Gyre Heros) para titulos/headers
+\usepackage{microtype}
+\linespread{1.05}
+
+% ---------- Paquetes de estilo ----------
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs}
+\usepackage{tcolorbox}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{xurl}          % permite cortar URLs largas (evita overfull en referencias)
+\tcbuselibrary{skins, breakable, listings}
+
+% ---------- Paleta ----------
+\definecolor{primary}{HTML}{0F2C59}    % Azul Marino Profundo
+\definecolor{secondary}{HTML}{337357}  % Verde Azulado
+\definecolor{ink}{HTML}{1A1A1A}
+\definecolor{softbg}{HTML}{F5F7FA}     % fondo cajas
+\definecolor{codebg}{HTML}{F4F6F8}     % fondo codigo
+\definecolor{rulegray}{HTML}{D9DEE4}
+\definecolor{kw}{HTML}{0F2C59}
+\definecolor{str}{HTML}{337357}
+\definecolor{cmt}{HTML}{8A94A6}
+\color{ink}
+
+% ---------- Enlaces ----------
+\hypersetup{colorlinks=true, linkcolor=primary, urlcolor=secondary, citecolor=secondary}
+
+% ---------- Encabezado / pie ----------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{rulegray}\leaders\hrule height \headrulewidth\hfill}}
+\fancyhead[L]{\footnotesize\sffamily\color{primary}Daily Brief}
+\fancyhead[R]{\footnotesize\sffamily\color{primary}<<CATEGORIA>>}   % ej. AI & Math
+\fancyfoot[C]{\footnotesize\sffamily\color{primary!70!black}\thepage}
+
+% ---------- Secciones ----------
+\titleformat{\section}
+  {\sffamily\large\bfseries\color{primary}}{\thesection}{0.6em}{}[{\color{rulegray}\titlerule[1pt]}]
+\titleformat{\subsection}
+  {\sffamily\normalsize\bfseries\color{secondary}}{}{0em}{}
+\titlespacing*{\section}{0pt}{12pt}{5pt}
+\titlespacing*{\subsection}{0pt}{7pt}{2pt}
+\setlist{noitemsep, topsep=3pt, parsep=1pt, leftmargin=1.3em}
+
+% ---------- Estilo de codigo (Eisvogel-like) ----------
+\lstdefinestyle{eis}{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\footnotesize\color{ink},
+  keywordstyle=\color{kw}\bfseries,
+  commentstyle=\color{cmt}\itshape,
+  stringstyle=\color{str},
+  numberstyle=\tiny\color{cmt},
+  numbers=left, numbersep=8pt,
+  showstringspaces=false,
+  breaklines=true, tabsize=4,
+  frame=none, xleftmargin=10pt, xrightmargin=4pt,
+  aboveskip=6pt, belowskip=2pt,
+  literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ñ}{{\~n}}1
+}
+\newtcblisting{code}[1][Python]{
+  listing only, listing style=eis,
+  colback=codebg, colframe=primary, boxrule=0pt,
+  leftrule=2.5pt, arc=2pt, top=3pt, bottom=3pt, left=2pt, right=2pt,
+  enhanced, breakable,
+  overlay={\node[anchor=north east, font=\sffamily\tiny\color{primary!75}, inner sep=4pt] at (frame.north east) {#1};}
+}
+
+% ---------- Tarjeta de fuente ----------
+\newtcolorbox{sourcecard}[2]{
+  enhanced, breakable, colback=softbg, colframe=secondary,
+  boxrule=0pt, leftrule=3pt, arc=2pt,
+  top=4pt, bottom=4pt, left=6pt, right=6pt,
+  fonttitle=\sffamily\bfseries\small\color{primary},
+  title={#1 \normalfont\color{secondary}\textbf{\textperiodcentered}\ \itshape\small #2}
+}
+
+% ---------- Caja de concepto / formula ----------
+\newtcolorbox{concept}[1]{
+  enhanced, colback=white, colframe=primary,
+  boxrule=0.7pt, arc=2pt, top=4pt, bottom=4pt,
+  coltitle=white, fonttitle=\sffamily\bfseries\small, title={#1}
+}
+
+% ---------- Caja de solucionario ----------
+% Uso: \begin{solutions}{Solucionario}  o  \begin{solutions}{Solucionario -- Parte I}
+\newtcolorbox{solutions}[1]{
+  enhanced, breakable, colback=softbg, colframe=ink,
+  boxrule=0pt, leftrule=3pt, arc=2pt, top=4pt, bottom=4pt, left=6pt, right=6pt,
+  coltitle=white, fonttitle=\sffamily\bfseries\small, title={#1}
+}
+
+% ---------- Caja de intuicion (util en niveles basicos) ----------
+\newtcolorbox{intuition}[1]{
+  enhanced, breakable, colback=secondary!6, colframe=secondary,
+  boxrule=0pt, leftrule=3pt, arc=2pt, top=4pt, bottom=4pt, left=6pt, right=6pt,
+  coltitle=white, fonttitle=\sffamily\bfseries\small, title={#1}
+}
+
+% ---------- Separador de parte (para briefs de dos niveles) ----------
+% Uso: \partdivider{PARTE I \textbullet\ Fundamentos}{Descripcion de una linea.}
+\newtcolorbox{partband}{
+  enhanced, colback=primary, colframe=primary, boxrule=0pt, arc=2pt,
+  top=6pt, bottom=6pt, left=8pt, right=8pt
+}
+\newcommand{\partdivider}[2]{%
+  \par\vspace{10pt}
+  \begin{partband}
+    {\sffamily\bfseries\large\color{white} #1}\par\vspace{1pt}
+    {\sffamily\footnotesize\color{white} #2}
+  \end{partband}
+  \vspace{4pt}
+}
+
+% ---------- Ejercicios (problem-set) ----------
+\newcounter{exc}
+\newcommand{\exercise}[1]{\par\medskip\noindent{\sffamily\bfseries\color{primary}Ejercicio \stepcounter{exc}\theexc.}\enspace #1}
+\newcommand{\question}[1]{\par\smallskip\noindent{\sffamily\bfseries\color{secondary}$\vartriangleright$}\enspace #1}
+
+% ---------- Fecha en espanol sin babel ----------
+\newcommand{\spanishdate}{\number\day\ de \ifcase\month\or enero\or febrero\or marzo\or abril\or mayo\or junio\or julio\or agosto\or septiembre\or octubre\or noviembre\or diciembre\fi\ de \number\year}
+
+% ---------- Titulo estilo deedy ColorTitle ----------
+\newcommand{\briefheader}[4]{% #1 kicker  #2 titulo  #3 subtitulo  #4 metadatos
+  \noindent{\color{primary}\rule{\textwidth}{2.5pt}}\par\vspace{2pt}
+  \noindent{\sffamily\footnotesize\bfseries\color{secondary}\MakeUppercase{#1}}\par\vspace{3pt}
+  \noindent{\sffamily\bfseries\Huge\color{primary}#2}\par\vspace{4pt}
+  \noindent{\sffamily\large\color{ink}#3}\par\vspace{5pt}
+  \noindent{\footnotesize\color{ink!70}#4}\par\vspace{2pt}
+  \noindent{\color{secondary}\rule{\textwidth}{1pt}}\par\vspace{10pt}
+}
+
+\begin{document}
+\setlength{\parskip}{3pt}
+\setlength{\parindent}{0pt}
+
+\briefheader
+  {Daily Multidisciplinary Brief \textbullet\ Categoria <<N>>/6: <<CATEGORIA>>}
+  {<<TITULO DEL BRIEF>>}
+  {<<Subtitulo: los 3-4 hilos que conectan los temas del dia>>}
+  {\textbf{Fecha:} \spanishdate \quad\textbullet\quad \textbf{Formato:} resumen multi-tema + ejercicios \quad\textbullet\quad \textbf{Nivel:} <<nivel>>}
+
+% ============================================================
+\section{Panorama del dia}
+<<Parrafo de contexto: que une los temas de hoy y por que importan juntos.
+Menciona cuantas fuentes se recorren y que se cierra con ejercicios.>>
+
+\begin{concept}{Mapa mental del dia}
+<<Formula central, pipeline o diagrama que resuma el dia. Ejemplo:>>
+\[
+  <<ecuacion o esquema>>
+\]
+<<Una o dos lineas explicando el mapa.>>
+\end{concept}
+
+% ============================================================
+\section{Resumenes por fuente}
+
+\subsection{1. <<Subtema uno>>}
+\begin{sourcecard}{<<Autores (anio)>>}{<<Titulo, venue o arXiv:XXXX.XXXXX.>>}
+<<Resumen de 3-4 lineas: que aporta la fuente, cual es su idea central y por que
+sigue siendo relevante. Denso, sin relleno.>>
+\end{sourcecard}
+<<Desarrollo breve: la formulacion clave, con matematica si aplica.>>
+\[
+  <<formula>>
+\]
+
+\subsection{2. <<Subtema dos>>}
+\begin{sourcecard}{<<Autores (anio)>>}{<<Titulo, venue o arXiv.>>}
+<<Resumen.>>
+\end{sourcecard}
+<<Desarrollo.>>
+
+\begin{code}[Python \textbullet\ <<que hace el snippet>>]
+# <<codigo minimo y ejecutable que ilustre el concepto>>
+\end{code}
+
+\subsection{3. <<Subtema tres>>}
+\begin{sourcecard}{<<Autores (anio)>>}{<<Titulo, venue o arXiv.>>}
+<<Resumen.>>
+\end{sourcecard}
+<<Desarrollo.>>
+
+\subsection{4. <<Sintesis: como se conectan los temas>>}
+\begin{sourcecard}{<<Autores (anio)>>}{<<Titulo, venue o arXiv.>>}
+<<Resumen de la fuente que amarra los hilos anteriores.>>
+\end{sourcecard}
+\begin{concept}{<<Formulacion clave>>}
+\[
+  <<formula>>
+\]
+<<Interpretacion en una linea.>>
+\end{concept}
+
+% ============================================================
+\section{Cuaderno de ejercicios}
+
+\exercise <<Ejercicio de derivacion o demostracion.>>
+
+\exercise <<Ejercicio de calculo a mano, con datos concretos y numeros pequenos.>>
+
+\exercise <<Ejercicio aplicado: modelo, estimacion o diseno.>>
+
+\question \textit{Razonamiento.} <<Pregunta abierta de criterio o trade-offs.>>
+
+\begin{solutions}{Solucionario}
+\small
+\textbf{E1.} <<Solucion paso a paso.>>\\[2pt]
+\textbf{E2.} <<Solucion con los numeros resueltos.>>\\[2pt]
+\textbf{E3.} <<Solucion.>>\\[2pt]
+\textbf{Razonamiento.} <<Respuesta argumentada.>>
+\end{solutions}
+
+% ============================================================
+\section{Fuentes y citas}
+{\small
+\begin{enumerate}[leftmargin=1.4em, label={[\arabic*]}]
+  \item <<Autor, A. (anio). \textit{Titulo}. Venue. DOI o arXiv.>> \url{<<URL>>}
+  \item <<Referencia 2.>> \url{<<URL>>}
+  \item <<Referencia 3.>> \url{<<URL>>}
+  \item <<Referencia 4.>> \url{<<URL>>}
+  \item <<Referencia 5: libro o recurso de fondo.>> \url{<<URL>>}
+\end{enumerate}
+}
+
+\end{document}

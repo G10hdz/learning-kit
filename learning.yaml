@@ -1,0 +1,198 @@
+# Learning systems registry — ejemplo público del patrón.
+# Los agentes consultan esto para saber qué sistemas existen, dónde vive
+# su estado y cómo accederlos. Es el equivalente de un agents.yaml para
+# el aprendizaje. No secrets aquí: credenciales en env de cada host.
+
+version: 1
+learning:
+  timezone: America/Mexico_City
+  vault: ~/Obsidian/MyVault
+  memory_backbone: ai-memory   # namespaces obsidian/*
+
+stages:
+  acquisition: Fuentes entran al sistema (catálogos, descargas)
+  production:  Material de estudio generado (briefs, libretas)
+  practice:    Entrenamiento activo (coaching, módulos interactivos)
+  memory:      Persistencia y recall (vault, ai-memory, grafo, índices)
+  surface:     Superficie humana (Obsidian, Kindle, notebooks)
+
+systems:
+  - id: founder-guide
+    name: Founder Guide
+    stage: acquisition
+    host: [local, server]
+    repo: acquisition/
+    access:
+      cli: scripts/acquire.py
+      api: "http://<host>:8080"
+      mcp: scripts/mcp_server.py
+    data:
+      catalog: docs/book-candidates.md
+      files: vault/sources/files
+      inbox: vault/inbox
+    flows_to: [calibre, notebooklm]
+    data_tier: T2
+    notes: >
+      acquire.py pending resuelve fuentes via cadena de resolvers
+      (directa -> plugins externos -> búsqueda). Los plugins viven
+      fuera del repo: cada instalación decide qué fuentes resuelve.
+      mcp_server.py es bridge stdio read-only sobre la REST API.
+
+  - id: capital-cultural
+    name: Capital Cultural
+    stage: production
+    host: work-laptop
+    repo: production/
+    access:
+      cli: scripts/{brief.sh,ingest.py,tex.sh,voice-cast.sh}
+    data:
+      vault: ${CAPITAL_CULTURAL_VAULT:-./vault}
+    flows_to: [study-buddy]
+    data_tier: T2
+    notes: >
+      Genera briefs diarios LaTeX/PDF desde libretas NotebookLM.
+      Provider-neutral: los agentes producen los mismos artefactos
+      via contratos de archivo.
+
+  - id: study-buddy
+    name: Study-buddy (vault de estudio)
+    stage: production
+    host: local
+    access:
+      files: 20-Study/Study-buddy
+    data:
+      briefs: 2026-Www/
+      backlog: temas_investigacion.md
+      roadmap: _roadmap-niveles.md
+    flows_to: [mega-vault, ai-memory]
+    data_tier: T2
+    notes: >
+      Vault de estudio que viaja como git bundle: un archivo con
+      historia completa, por cualquier canal. rsync al mega vault.
+
+  - id: notebooklm
+    name: NotebookLM
+    stage: production
+    host: google
+    access:
+      cli: nlm
+    data:
+      notebooks: "<proyecto> - <tema>"
+    flows_to: [study-buddy]
+    notes: >
+      Una libreta por tema; audio overviews. Login interactivo,
+      cookies caducan cada pocas semanas.
+
+  - id: ai-coach
+    name: AI Coach
+    stage: practice
+    host: local
+    repo: (no incluido — coaching con estado personal)
+    access:
+      files: state/, coaching/, bank/, docs/
+      skills: vendor/interview-coach, vendor/storyteller
+    flows_to: [ai-memory]
+    data_tier: T3
+    notes: >
+      Coaching bilingüe ES/EN: entrevistas, oratoria, pitch.
+      vendor/ read-only (skills de terceros, instaladas aparte).
+      state/ tiene datos personales: gitignored, nunca se publica.
+      Sync a ai-memory via external_lanes -> obsidian/coaching.
+
+  - id: hypatia
+    name: Hypatia
+    stage: practice
+    host: local
+    repo: practice/
+    access:
+      files: modulos HTML estáticos
+    flows_to: [ai-memory]
+    data_tier: T2
+    notes: Aprendizaje adaptativo neurodivergente; sin build step.
+
+  - id: mega-vault
+    name: Obsidian mega vault
+    stage: surface
+    host: local
+    access:
+      files: vault completo
+    flows_to: [ai-memory]
+    data_tier: T1
+    notes: >
+      Superficie humana única. Solo una carpeta: cualquier proceso
+      puede escribir Markdown; lo consultable por agentes entra por
+      lanes de vault-sync, lo demás queda privado por omisión.
+
+  - id: learning-surface
+    name: learning-surface
+    stage: surface
+    host: tailnet
+    repo: surface/
+    access:
+      cli: scripts/bundle.sh + scripts/serve.sh
+      url: http://<host>.<tailnet>.ts.net:8787
+    data_tier: T2
+    notes: >
+      Hub web móvil servido dentro de la tailnet (launchd + http.server
+      en la IP tailscale del host). Junta las apps de practice en un
+      solo lugar alcanzable desde teléfono/tablet. Nada sale a internet
+      público por diseño.
+
+  - id: ai-memory
+    name: AI Memory
+    stage: memory
+    host: local
+    access:
+      cli: ai-memory
+      mcp: ai-memory
+    data:
+      namespaces: obsidian/{meetings,work-anon,projects,resources,personal,inbox,study,summaries,research,sources,coaching,hypatia}
+    data_tier: T2
+    notes: >
+      Segundo cerebro consultable por agentes. vault-sync escribe
+      por lanes; los snapshots de archivo no se sincronizan.
+
+  - id: vault-sync
+    name: vault-sync
+    stage: memory
+    host: local
+    repo: memory/
+    access:
+      cli: vault_sync.py
+    data:
+      config: ~/.config/vault-sync/config.json
+      state: ~/.cache/vault-sync/state.json
+    flows_to: [ai-memory]
+    data_tier: T2
+    notes: Lanes del vault + external_lanes -> namespaces de ai-memory.
+
+  - id: twin
+    name: Twin (grafo personal)
+    stage: memory
+    host: server
+    access:
+      mcp: twin
+    data: twin_graph.json, provenance.db
+    data_tier: T2
+    notes: Tools read-only (stats/search/get); write path solo ingest.
+
+  - id: obsidian-embeddings
+    name: Obsidian Embeddings
+    stage: memory
+    host: local
+    access:
+      cli: index_vaults.py
+    data: ChromaDB persistent store
+    data_tier: T2
+    notes: Índice semántico del vault; búsqueda por significado.
+
+  - id: calibre
+    name: Calibre (CWA)
+    stage: surface
+    host: server
+    access:
+      http: ":8093 (solo Tailscale)"
+      ingest_dir: ~/cwa/ingest
+    flows_to: [kindle]
+    data_tier: T2
+    notes: Convierte formato, completa metadata, envía a Kindle por correo.

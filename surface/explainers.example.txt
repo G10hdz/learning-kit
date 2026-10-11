@@ -1,0 +1,4 @@
+# Explainers que entran al surface. Solo lo listado aqui se publica.
+# Copia a explainers.txt y lista un JSON de modelo por linea (rutas ~ ok).
+#
+# ~/agent-configs/_shared/pr-explainer/player/examples/<modelo>.json

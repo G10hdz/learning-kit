@@ -1,0 +1,13 @@
+{
+  "vault": "~/Obsidian/MyVault",
+  "lanes": {
+    "00-Inbox": "obsidian/inbox",
+    "20-Study": "obsidian/study",
+    "30-Projects": "obsidian/projects",
+    "50-Resources": "obsidian/resources"
+  },
+  "external_lanes": {
+    "~/projects/my-app": "obsidian/my-app"
+  },
+  "state_dir": "~/.cache/vault-sync"
+}

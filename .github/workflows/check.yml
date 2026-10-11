@@ -1,0 +1,47 @@
+name: check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Compile python modules
+        run: |
+          python3 -m py_compile production/scripts/ingest.py production/tools/score_sources.py
+          python3 -m py_compile memory/vault_sync.py memory/tests/test_vault_sync.py
+
+      - name: founder-guide tests
+        run: |
+          cd acquisition
+          uv venv && uv pip install -q -e '.[dev]'
+          .venv/bin/python -m unittest discover -s tests
+
+      - name: vault-sync tests
+        run: python3 memory/tests/test_vault_sync.py
+
+      - name: practice checks
+        run: |
+          cd practice
+          node --check shared/engine.js
+          node scripts/validate-bank.mjs
+          node scripts/test-fsrs.mjs
+
+      - name: shell + node syntax
+        run: |
+          bash -n surface/scripts/bundle.sh surface/scripts/serve.sh
+          bash -n production/scripts/brief.sh production/scripts/tex.sh production/scripts/voice-cast.sh
+          bash -n install.sh
+          node --check surface/scripts/explainers.mjs

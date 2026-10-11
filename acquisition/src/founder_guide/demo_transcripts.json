@@ -1,0 +1,40 @@
+{
+  "videos": {
+    "demo-founder-001": {
+      "url": "https://youtube.com/watch?v=demo-founder-001",
+      "manual": {
+        "es": [
+          {"start": 0, "duration": 30, "text": "<i>Habla  con usuarios antes de construir.</i>"},
+          {"start": 30, "duration": 30, "text": "Para validar, pregunta por problemas reales."},
+          {"start": 60, "duration": 30, "text": "Vuelve con usuarios y muestra una oferta pequeña."},
+          {"start": 90, "duration": 30, "text": "Puedes validar midiendo compromisos, no cumplidos."}
+        ]
+      },
+      "automatic": {
+        "es": [
+          {"start": 0, "duration": 30, "text": "auto noise"},
+          {"start": 30, "duration": 30, "text": "should not win"},
+          {"start": 60, "duration": 30, "text": "manual preferred."},
+          {"start": 90, "duration": 30, "text": "ignore auto."}
+        ]
+      }
+    },
+    "demo-auto-only": {
+      "url": "https://youtube.com/watch?v=demo-auto-only",
+      "manual": {},
+      "automatic": {
+        "es": [
+          {"start": 0, "duration": 30, "text": "Sin caption manual en este video."},
+          {"start": 30, "duration": 30, "text": "El automático cubre validar con usuarios."},
+          {"start": 60, "duration": 30, "text": "Procedencia automatic queda registrada."},
+          {"start": 90, "duration": 30, "text": "Así el fallback queda probado."}
+        ]
+      }
+    },
+    "demo-no-caption": {
+      "url": "https://youtube.com/watch?v=demo-no-caption",
+      "manual": {},
+      "automatic": {}
+    }
+  }
+}

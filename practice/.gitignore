@@ -1,0 +1,48 @@
+# Build/dependency files
+node_modules/
+__pycache__/
+*.pyc
+.venv*/
+
+# Dev/IDE files
+.vscode/
+.idea/
+.DS_Store
+
+# AI agent configs
+.claude/
+.qwen/
+
+# Local Netlify folder
+.netlify/
+
+# Backup files
+*.bak
+*.backup_*
+backup_*/
+
+# AI explanation files (generated, not committed)
+enhanced_explanations.json
+*_explanations.log
+.explanation_checkpoint_*.json
+
+# Failed questions and OCR output
+failed_questions.json
+ocr_output/
+
+# Local exam banks, scans, and Word sources (not committed)
+study-materials/
+
+# Archive
+archive-local/
+chroma_theory/
+stitch-reference/
+
+# Strategic documents (git ignored)
+SAA_ARCHITECTURE.md
+PHASE_TWO_PLAN.md
+SUPABASE_SETUP.md
+AUTH_INTEGRATION.md
+PHASE2_AUTH_SUMMARY.md
+.env
+.vercel

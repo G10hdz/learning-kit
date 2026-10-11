@@ -1,0 +1,24 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+*.egg
+*.sqlite
+*.sqlite3
+*.db
+.env
+.DS_Store
+
+# corpus local (copyright / privado); esqueleto ok si vacio
+vault/**/full.md
+vault/**/chunks/
+vault/**/_meta.yaml
+vault/sources/files/
+vault/inbox/*
+!vault/inbox/.gitkeep
+vault/__pycache__/
