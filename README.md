@@ -5,7 +5,7 @@ repo para clonar, instalar e iterar. Los agentes no son el truco: son la
 tuberia. Cinco pisos conectados con piezas chicas y auditables en vez de una
 app monolitica.
 
-![Cinco pisos: fuentes -> acquisition -> NotebookLM -> production -> practice -> surface; vault y memory debajo](docs/assets/pipeline.svg)
+![Cinco pisos: fuentes -> acquisition -> NotebookLM -> production -> practice -> surface; vault y memory debajo](docs/assets/pipeline-flow.svg)
 
 ```
 acquisition/   founder-guide: catalogo -> inbox -> Calibre -> NotebookLM
