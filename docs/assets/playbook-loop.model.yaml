@@ -1,0 +1,17 @@
+# Modelo del diagrama playbook-loop.svg — flujo, topologia loop con hub.
+# Estaciones = pasos del playbook; spokes = write-back al vault/memoria.
+hub:
+  - { id: vault-memory, label: "Vault + ai-memory", kind: store,
+      src: "docs/playbook-estudio.md#loop" }
+stations:
+  - { id: libro,      label: Libro,      kind: input,    src: "playbook: acquisition/scripts/acquire.py add" }
+  - { id: libreta,    label: Libreta,    kind: external, focal: true, src: "playbook: nlm study" }
+  - { id: artefactos, label: Artefactos, kind: service,  src: "playbook: nlm audio/flashcards/quiz" }
+  - { id: briefs,     label: Briefs,     kind: service,  src: "playbook: production brief.sh -> .md" }
+  - { id: repaso,     label: Repaso,     kind: service,  src: "playbook: practice/Flashcards FSRS-6" }
+  - { id: surface,    label: Surface,    kind: service,  src: "playbook: surface/ hub tailnet" }
+ring: [libro, libreta, artefactos, briefs, repaso, surface]  # cw, surface -> libro
+spokes:
+  - { from: artefactos, to: vault-memory, label: AUDIOBOOKS, src: "playbook: nlm download -> carpeta" }
+  - { from: briefs,     to: vault-memory, label: NOTAS,      src: "playbook: briefs .md al vault" }
+  - { from: repaso,     to: vault-memory, label: PROGRESO,   src: "learning.yaml:109 hypatia->ai-memory" }

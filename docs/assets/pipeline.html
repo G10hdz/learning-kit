@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>learning-kit · Contenedores</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #f7f7f9;
+      --color-ink: #26233d;
+      --font-sans: 'Geist', system-ui, sans-serif;
+    }
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+    .frame { max-width: 1240px; width: 100%; }
+    svg { width: 100%; display: block; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+
+<svg viewBox="0 0 1280 580" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="lk-t lk-d">
+  <title id="lk-t">learning-kit · contenedores</title>
+  <desc id="lk-d">Pipeline de estudio: fuentes a acquisition, NotebookLM, production, practice y surface; vault y memory debajo.</desc>
+  <style>
+    svg {
+      --paper:#f7f7f9; --paper2:#ffffff; --ink:#26233d; --muted:#5d6478;
+      --soft:#9a9db2; --rule:rgba(38,35,61,.12); --accent:#7c5cf0;
+      --atint:rgba(124,92,240,.08); --link:#4f46e5;
+      --store:rgba(38,35,61,.05); --zonef:rgba(38,35,61,.02);
+      --zones:rgba(38,35,61,.10); --input:rgba(93,100,120,.10);
+    }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        --paper:#14121f; --paper2:#211f30; --ink:#efedfb; --muted:#a49ece;
+        --soft:#787a94; --rule:rgba(239,237,251,.14); --accent:#bb86ff;
+        --atint:rgba(187,134,255,.14); --link:#8f9bff;
+        --store:rgba(239,237,251,.07); --zonef:rgba(239,237,251,.03);
+        --zones:rgba(239,237,251,.12); --input:rgba(164,158,206,.10);
+      }
+    }
+    .t-name    { font: 600 12px 'Geist', sans-serif; fill: var(--ink); }
+    .t-sub     { font: 9px 'Geist Mono', monospace; fill: var(--muted); }
+    .t-tag     { font: 7px 'Geist Mono', monospace; fill: var(--soft); letter-spacing: .08em; }
+    .t-lab     { font: 8px 'Geist Mono', monospace; fill: var(--soft); letter-spacing: .06em; }
+    .t-eye     { font: 8px 'Geist Mono', monospace; fill: var(--soft); letter-spacing: .18em; }
+    .t-zone    { font: 7px 'Geist Mono', monospace; fill: var(--soft); letter-spacing: .14em; }
+    .t-title   { font: 28px 'Instrument Serif', serif; fill: var(--ink); }
+    .t-cap     { font: 8px 'Geist Mono', monospace; fill: var(--soft); }
+    .b-input   { fill: var(--input); stroke: var(--soft); }
+    .b-node    { fill: var(--paper2); stroke: var(--ink); }
+    .b-focal   { fill: var(--atint); stroke: var(--accent); }
+    .b-store   { fill: var(--store); stroke: var(--muted); }
+    .tag       { fill: none; stroke: var(--rule); }
+    .mask      { fill: var(--paper); }
+    .zone      { fill: var(--zonef); stroke: var(--zones); }
+    .edge      { fill: none; stroke: var(--muted); stroke-width: 1.2; }
+    .edge-link { fill: none; stroke: var(--link); stroke-width: 1.2; }
+    .mk-m      { fill: var(--muted); }
+    .mk-l      { fill: var(--link); }
+  </style>
+  <defs>
+    <marker id="arr-m" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" class="mk-m"/>
+    </marker>
+    <marker id="arr-l" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" class="mk-l"/>
+    </marker>
+  </defs>
+
+  <!-- paper -->
+  <rect width="1280" height="580" style="fill:var(--paper)"/>
+
+  <!-- title -->
+  <text class="t-eye" x="40" y="46">LEARNING-KIT · CONTENEDORES</text>
+  <text class="t-title" x="40" y="84">Del libro al repaso espaciado</text>
+
+  <!-- zones -->
+  <rect class="zone" x="352" y="112" width="296" height="112" rx="8" stroke-width="0.8"/>
+  <rect class="mask" x="360" y="116" width="44" height="12" rx="2"/>
+  <text class="t-zone" x="382" y="125" text-anchor="middle">GOOGLE</text>
+
+  <rect class="zone" x="1024" y="270" width="212" height="96" rx="8" stroke-width="0.8"/>
+  <rect class="mask" x="1032" y="274" width="50" height="12" rx="2"/>
+  <text class="t-zone" x="1057" y="283" text-anchor="middle">TAILNET</text>
+
+  <!-- edges (antes que los nodos) -->
+  <line class="edge" x1="220" y1="318" x2="290" y2="318" marker-end="url(#arr-m)"/>
+  <line class="edge-link" x1="430" y1="290" x2="430" y2="196" marker-end="url(#arr-l)"/>
+  <line class="edge-link" x1="570" y1="196" x2="570" y2="290" marker-end="url(#arr-l)"/>
+  <line class="edge" x1="720" y1="318" x2="760" y2="318" marker-end="url(#arr-m)"/>
+  <line class="edge" x1="970" y1="318" x2="1040" y2="318" marker-end="url(#arr-m)"/>
+  <line class="edge" x1="600" y1="346" x2="600" y2="430" marker-end="url(#arr-m)"/>
+  <line class="edge" x1="720" y1="458" x2="790" y2="458" marker-end="url(#arr-m)"/>
+  <line class="edge" x1="880" y1="346" x2="880" y2="430" marker-end="url(#arr-m)"/>
+
+  <!-- edge labels (mask + texto, gap >= 6px de la arista) -->
+  <rect class="mask" x="231" y="298" width="48" height="12" rx="2"/>
+  <text class="t-lab" x="255" y="307" text-anchor="middle">CATALOG</text>
+
+  <rect class="mask" x="350" y="236" width="64" height="12" rx="2"/>
+  <text class="t-lab" x="382" y="245" text-anchor="middle">NLM STUDY</text>
+
+  <rect class="mask" x="580" y="236" width="80" height="12" rx="2"/>
+  <text class="t-lab" x="620" y="245" text-anchor="middle">BRIEFS · AUDIO</text>
+
+  <rect class="mask" x="738" y="298" width="34" height="12" rx="2"/>
+  <text class="t-lab" x="755" y="307" text-anchor="middle">DECKS</text>
+
+  <rect class="mask" x="976" y="298" width="58" height="12" rx="2"/>
+  <text class="t-lab" x="1005" y="307" text-anchor="middle">BUNDLE.SH</text>
+
+  <rect class="mask" x="610" y="380" width="60" height="12" rx="2"/>
+  <text class="t-lab" x="640" y="389" text-anchor="middle">BRIEFS .MD</text>
+
+  <rect class="mask" x="739" y="430" width="32" height="12" rx="2"/>
+  <text class="t-lab" x="755" y="439" text-anchor="middle">SYNC</text>
+
+  <rect class="mask" x="890" y="380" width="52" height="12" rx="2"/>
+  <text class="t-lab" x="916" y="389" text-anchor="middle">PROGRESO</text>
+
+  <!-- nodes -->
+  <g>
+    <rect class="mask" x="40" y="290" width="180" height="56" rx="6"/>
+    <rect class="b-input" x="40" y="290" width="180" height="56" rx="6"/>
+    <rect class="tag" x="48" y="296" width="28" height="12" rx="2"/>
+    <text class="t-tag" x="62" y="305" text-anchor="middle">SRC</text>
+    <text class="t-name" x="130" y="320" text-anchor="middle">Fuentes</text>
+    <text class="t-sub" x="130" y="336" text-anchor="middle">libros · URLs · papers</text>
+  </g>
+  <g>
+    <rect class="mask" x="290" y="290" width="180" height="56" rx="6"/>
+    <rect class="b-node" x="290" y="290" width="180" height="56" rx="6"/>
+    <rect class="tag" x="298" y="296" width="28" height="12" rx="2"/>
+    <text class="t-tag" x="312" y="305" text-anchor="middle">PKG</text>
+    <text class="t-name" x="380" y="320" text-anchor="middle">acquisition/</text>
+    <text class="t-sub" x="380" y="336" text-anchor="middle">founder-guide · catalog</text>
+  </g>
+  <g>
+    <rect class="mask" x="540" y="290" width="180" height="56" rx="6"/>
+    <rect class="b-node" x="540" y="290" width="180" height="56" rx="6"/>
+    <rect class="tag" x="548" y="296" width="28" height="12" rx="2"/>
+    <text class="t-tag" x="562" y="305" text-anchor="middle">PKG</text>
+    <text class="t-name" x="630" y="320" text-anchor="middle">production/</text>
+    <text class="t-sub" x="630" y="336" text-anchor="middle">capital-cultural · briefs</text>
+  </g>
+  <g>
+    <rect class="mask" x="790" y="290" width="180" height="56" rx="6"/>
+    <rect class="b-node" x="790" y="290" width="180" height="56" rx="6"/>
+    <rect class="tag" x="798" y="296" width="28" height="12" rx="2"/>
+    <text class="t-tag" x="812" y="305" text-anchor="middle">PKG</text>
+    <text class="t-name" x="880" y="320" text-anchor="middle">practice/</text>
+    <text class="t-sub" x="880" y="336" text-anchor="middle">hypatia · FSRS-6</text>
+  </g>
+  <g>
+    <rect class="mask" x="1040" y="290" width="180" height="56" rx="6"/>
+    <rect class="b-node" x="1040" y="290" width="180" height="56" rx="6"/>
+    <rect class="tag" x="1048" y="296" width="28" height="12" rx="2"/>
+    <text class="t-tag" x="1062" y="305" text-anchor="middle">HUB</text>
+    <text class="t-name" x="1130" y="320" text-anchor="middle">surface/</text>
+    <text class="t-sub" x="1130" y="336" text-anchor="middle">hub web estático</text>
+  </g>
+  <g>
+    <rect class="mask" x="380" y="140" width="240" height="56" rx="6"/>
+    <rect class="b-focal" x="380" y="140" width="240" height="56" rx="6"/>
+    <rect class="tag" x="388" y="146" width="28" height="12" rx="2"/>
+    <text class="t-tag" x="402" y="155" text-anchor="middle">EXT</text>
+    <text class="t-name" x="500" y="170" text-anchor="middle">NotebookLM</text>
+    <text class="t-sub" x="500" y="186" text-anchor="middle">nlm · libretas + audio</text>
+  </g>
+  <g>
+    <rect class="mask" x="540" y="430" width="180" height="56" rx="6"/>
+    <rect class="b-store" x="540" y="430" width="180" height="56" rx="6"/>
+    <rect class="tag" x="548" y="436" width="28" height="12" rx="2"/>
+    <text class="t-tag" x="562" y="445" text-anchor="middle">DIR</text>
+    <text class="t-name" x="630" y="460" text-anchor="middle">vault Obsidian</text>
+    <text class="t-sub" x="630" y="476" text-anchor="middle">solo una carpeta</text>
+  </g>
+  <g>
+    <rect class="mask" x="790" y="430" width="180" height="56" rx="6"/>
+    <rect class="b-store" x="790" y="430" width="180" height="56" rx="6"/>
+    <rect class="tag" x="798" y="436" width="28" height="12" rx="2"/>
+    <text class="t-tag" x="812" y="445" text-anchor="middle">MCP</text>
+    <text class="t-name" x="880" y="460" text-anchor="middle">memory/</text>
+    <text class="t-sub" x="880" y="476" text-anchor="middle">vault-sync + embeddings</text>
+  </g>
+
+  <!-- caption -->
+  <text class="t-cap" x="40" y="552">omite: calibre→kindle (opcional) · ai-coach (estado personal, fuera del kit) · fuente: learning.yaml</text>
+</svg>
+
+  </div>
+</body>
+</html>

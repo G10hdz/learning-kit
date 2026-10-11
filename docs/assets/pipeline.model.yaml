@@ -1,0 +1,24 @@
+# Modelo del diagrama pipeline.svg — contenedores, topologia pipeline.
+# Todo nodo y arista traza a learning.yaml (systems[].flows_to) o al README.
+nodes:
+  - { id: fuentes,     label: Fuentes,        kind: input,    src: "README.md#quickstart" }
+  - { id: acquisition, label: acquisition/,   kind: service,  src: "learning.yaml:20 systems[founder-guide]" }
+  - { id: notebooklm,  label: NotebookLM,     kind: external, focal: true, src: "learning.yaml:73" }
+  - { id: production,  label: production/,    kind: service,  src: "learning.yaml:41 systems[capital-cultural]" }
+  - { id: practice,    label: practice/,      kind: service,  src: "learning.yaml:102 systems[hypatia]" }
+  - { id: surface,     label: surface/,       kind: service,  group: tailnet, src: "learning.yaml:126" }
+  - { id: vault,       label: vault Obsidian, kind: store,    src: "learning.yaml:113 systems[mega-vault]" }
+  - { id: memory,      label: memory/,        kind: store,    src: "learning.yaml:155,179 (vault-sync + obsidian-embeddings)" }
+edges:
+  - { from: fuentes,    to: acquisition, label: CATALOG,        src: "learning.yaml:29-32 (catalog+inbox)" }
+  - { from: acquisition, to: notebooklm, label: NLM STUDY,      src: "learning.yaml:33 flows_to[notebooklm]" }
+  - { from: notebooklm, to: production,  label: BRIEFS + AUDIO, src: "learning.yaml:81 flows_to[study-buddy]" }
+  - { from: production, to: practice,    label: DECKS,          src: "docs/playbook-estudio.md" }
+  - { from: practice,   to: surface,     label: BUNDLE.SH,      src: "surface/scripts/bundle.sh" }
+  - { from: production, to: vault,       label: BRIEFS .MD,     src: "learning.yaml:67 study-buddy->mega-vault" }
+  - { from: vault,      to: memory,      label: SYNC,           src: "learning.yaml:165 lanes -> ai-memory" }
+  - { from: practice,   to: memory,      label: PROGRESO,       src: "learning.yaml:109 hypatia->ai-memory" }
+omitted:
+  - calibre -> kindle (opcional, learning.yaml:189)
+  - ai-coach (estado personal, no incluido en el kit)
+  - twin (grafo personal, fuera del repo)

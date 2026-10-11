@@ -4,6 +4,8 @@ El camino corto de "tengo un libro" a "lo escucho y lo retengo" usando solo
 `nlm` + un vault de notas + las apps de `practice/`. Todo lo demas en el kit
 son versiones más pulidas de estas mismas piezas.
 
+![El ciclo de estudio: libro -> libreta -> artefactos -> briefs -> repaso -> surface, escribiendo al vault en cada vuelta](assets/playbook-loop.svg)
+
 ## 0. Una sola vez
 
 ```sh

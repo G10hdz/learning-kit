@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>learning-kit · Loop de estudio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #f7f7f9;
+      --color-ink: #26233d;
+      --font-sans: 'Geist', system-ui, sans-serif;
+    }
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+    .frame { max-width: 960px; width: 100%; }
+    svg { width: 100%; display: block; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+
+<svg viewBox="0 0 960 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="lp-t lp-d">
+  <title id="lp-t">playbook de estudio · loop</title>
+  <desc id="lp-d">Ciclo: libro, libreta, artefactos, briefs, repaso, surface. Cada vuelta escribe al vault y a la memoria.</desc>
+  <style>
+    svg {
+      --paper:#f7f7f9; --paper2:#ffffff; --ink:#26233d; --muted:#5d6478;
+      --soft:#9a9db2; --rule:rgba(38,35,61,.12); --accent:#7c5cf0;
+      --atint:rgba(124,92,240,.08); --link:#4f46e5;
+      --store:rgba(38,35,61,.05); --input:rgba(93,100,120,.10);
+    }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        --paper:#14121f; --paper2:#211f30; --ink:#efedfb; --muted:#a49ece;
+        --soft:#787a94; --rule:rgba(239,237,251,.14); --accent:#bb86ff;
+        --atint:rgba(187,134,255,.14); --link:#8f9bff;
+        --store:rgba(239,237,251,.07); --input:rgba(164,158,206,.10);
+      }
+    }
+    .t-name  { font: 600 12px 'Geist', sans-serif; fill: var(--ink); }
+    .t-sub   { font: 9px 'Geist Mono', monospace; fill: var(--muted); }
+    .t-tag   { font: 7px 'Geist Mono', monospace; fill: var(--soft); letter-spacing: .08em; }
+    .t-lab   { font: 8px 'Geist Mono', monospace; fill: var(--soft); letter-spacing: .06em; }
+    .t-eye   { font: 8px 'Geist Mono', monospace; fill: var(--soft); letter-spacing: .18em; }
+    .t-title { font: 28px 'Instrument Serif', serif; fill: var(--ink); }
+    .t-cap   { font: 8px 'Geist Mono', monospace; fill: var(--soft); }
+    .b-input { fill: var(--input); stroke: var(--soft); }
+    .b-node  { fill: var(--paper2); stroke: var(--ink); }
+    .b-focal { fill: var(--atint); stroke: var(--accent); }
+    .b-store { fill: var(--store); stroke: var(--muted); }
+    .tag     { fill: none; stroke: var(--rule); }
+    .mask    { fill: var(--paper); }
+    .ring    { fill: none; stroke: var(--muted); stroke-width: 1.2; }
+    .spoke   { fill: none; stroke: var(--muted); stroke-width: 1; stroke-dasharray: 4,3; }
+    .mk-m    { fill: var(--muted); }
+  </style>
+  <defs>
+    <marker id="arr-m" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" class="mk-m"/>
+    </marker>
+  </defs>
+
+  <!-- paper -->
+  <rect width="960" height="620" style="fill:var(--paper)"/>
+
+  <!-- title -->
+  <text class="t-eye" x="40" y="44">PLAYBOOK-ESTUDIO · FLUJO</text>
+  <text class="t-title" x="40" y="82">Libro → libreta → retención</text>
+
+  <!-- ring edges -->
+  <path class="ring" d="M 555.00,149.60 A 200,200 0 0 1 632.90,206.08" marker-end="url(#arr-m)"/>
+  <path class="ring" d="M 666.59,263.00 A 200,200 0 0 1 667.02,405.88" marker-end="url(#arr-m)"/>
+  <path class="ring" d="M 633.67,463.00 A 200,200 0 0 1 556.11,519.95" marker-end="url(#arr-m)"/>
+  <path class="ring" d="M 405.00,520.40 A 200,200 0 0 1 327.10,463.92" marker-end="url(#arr-m)"/>
+  <path class="ring" d="M 293.41,407.00 A 200,200 0 0 1 292.98,264.12" marker-end="url(#arr-m)"/>
+  <path class="ring" d="M 326.33,207.00 A 200,200 0 0 1 403.89,150.05" marker-end="url(#arr-m)"/>
+
+  <!-- spokes (write-back al hub) -->
+  <path class="spoke" d="M 604.71,407.00 L 556.21,379.00" marker-end="url(#arr-m)"/>
+  <path class="spoke" d="M 480.00,507.00 L 480.00,379.00" marker-end="url(#arr-m)"/>
+  <path class="spoke" d="M 355.29,407.00 L 403.79,379.00" marker-end="url(#arr-m)"/>
+
+  <!-- spoke labels -->
+  <rect class="mask" x="590" y="387" width="62" height="12" rx="2"/>
+  <text class="t-lab" x="621" y="396" text-anchor="middle">AUDIOBOOKS</text>
+  <rect class="mask" x="488" y="437" width="38" height="12" rx="2"/>
+  <text class="t-lab" x="507" y="446" text-anchor="middle">NOTAS</text>
+  <rect class="mask" x="316" y="387" width="54" height="12" rx="2"/>
+  <text class="t-lab" x="343" y="396" text-anchor="middle">PROGRESO</text>
+
+  <!-- hub -->
+  <rect class="mask" x="370" y="291" width="220" height="88" rx="6"/>
+  <rect class="b-store" x="370" y="291" width="220" height="88" rx="6"/>
+  <text class="t-name" x="480" y="326" text-anchor="middle">Vault + ai-memory</text>
+  <text class="t-sub" x="480" y="343" text-anchor="middle">carpeta + memoria MCP</text>
+  <text class="t-sub" x="480" y="359" text-anchor="middle">consultable por agentes</text>
+
+  <!-- stations -->
+  <g>
+    <rect class="mask" x="405" y="107" width="150" height="56" rx="6"/>
+    <rect class="b-input" x="405" y="107" width="150" height="56" rx="6"/>
+    <rect class="tag" x="413" y="113" width="28" height="12" rx="2"/>
+    <text class="t-tag" x="427" y="122" text-anchor="middle">SRC</text>
+    <text class="t-name" x="480" y="137" text-anchor="middle">Libro</text>
+    <text class="t-sub" x="480" y="153" text-anchor="middle">catalog → inbox</text>
+  </g>
+  <g>
+    <rect class="mask" x="578" y="207" width="150" height="56" rx="6"/>
+    <rect class="b-focal" x="578" y="207" width="150" height="56" rx="6"/>
+    <rect class="tag" x="586" y="213" width="28" height="12" rx="2"/>
+    <text class="t-tag" x="600" y="222" text-anchor="middle">NLM</text>
+    <text class="t-name" x="653" y="237" text-anchor="middle">Libreta</text>
+    <text class="t-sub" x="653" y="253" text-anchor="middle">nlm study</text>
+  </g>
+  <g>
+    <rect class="mask" x="578" y="407" width="150" height="56" rx="6"/>
+    <rect class="b-node" x="578" y="407" width="150" height="56" rx="6"/>
+    <rect class="tag" x="586" y="413" width="28" height="12" rx="2"/>
+    <text class="t-tag" x="600" y="422" text-anchor="middle">NLM</text>
+    <text class="t-name" x="653" y="437" text-anchor="middle">Artefactos</text>
+    <text class="t-sub" x="653" y="453" text-anchor="middle">audio · quiz · cards</text>
+  </g>
+  <g>
+    <rect class="mask" x="405" y="507" width="150" height="56" rx="6"/>
+    <rect class="b-node" x="405" y="507" width="150" height="56" rx="6"/>
+    <rect class="tag" x="413" y="513" width="28" height="12" rx="2"/>
+    <text class="t-tag" x="427" y="522" text-anchor="middle">PKG</text>
+    <text class="t-name" x="480" y="537" text-anchor="middle">Briefs</text>
+    <text class="t-sub" x="480" y="553" text-anchor="middle">LaTeX → .md</text>
+  </g>
+  <g>
+    <rect class="mask" x="232" y="407" width="150" height="56" rx="6"/>
+    <rect class="b-node" x="232" y="407" width="150" height="56" rx="6"/>
+    <rect class="tag" x="240" y="413" width="28" height="12" rx="2"/>
+    <text class="t-tag" x="254" y="422" text-anchor="middle">PKG</text>
+    <text class="t-name" x="307" y="437" text-anchor="middle">Repaso</text>
+    <text class="t-sub" x="307" y="453" text-anchor="middle">FSRS-6 decks</text>
+  </g>
+  <g>
+    <rect class="mask" x="232" y="207" width="150" height="56" rx="6"/>
+    <rect class="b-node" x="232" y="207" width="150" height="56" rx="6"/>
+    <rect class="tag" x="240" y="213" width="28" height="12" rx="2"/>
+    <text class="t-tag" x="254" y="222" text-anchor="middle">HUB</text>
+    <text class="t-name" x="307" y="237" text-anchor="middle">Surface</text>
+    <text class="t-sub" x="307" y="253" text-anchor="middle">hub tailnet</text>
+  </g>
+
+  <!-- caption -->
+  <text class="t-cap" x="40" y="586">cada vuelta alimenta el vault · fuente: docs/playbook-estudio.md</text>
+</svg>
+
+  </div>
+</body>
+</html>

@@ -5,19 +5,15 @@ repo para clonar, instalar e iterar. Los agentes no son el truco: son la
 tuberia. Cinco pisos conectados con piezas chicas y auditables en vez de una
 app monolitica.
 
+![Cinco pisos: fuentes -> acquisition -> NotebookLM -> production -> practice -> surface; vault y memory debajo](docs/assets/pipeline.svg)
+
 ```
-FUENTES ── libros, papers, URLs, transcripts, libretas NotebookLM
-   │
 acquisition/   founder-guide: catalogo -> inbox -> Calibre -> NotebookLM
-   │
 production/    capital-cultural: libretas -> briefs diarios LaTeX/PDF
-   │                               + narracion de audiolibros (voice-cast)
-   │
+               + narracion de audiolibros (voice-cast)
 practice/      hypatia: modulos adaptativos estaticos (quiz, flashcards FSRS)
-   │
 memory/        vault-sync: notas Markdown -> namespaces de una memoria MCP
                embeddings: indice semantico del vault (ChromaDB + bge-m3)
-   │
 surface/       hub web estatico servido dentro de tu tailnet (nada publico)
 ```
 
