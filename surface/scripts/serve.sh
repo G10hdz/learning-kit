@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# serve.sh — publica site/ en la tailnet.
+# serve.sh: publica site/ en la tailnet.
 #
 # http.server via launchd escuchando SOLO en la IP tailscale del host:
 # el trafico tailnet ya va cifrado (WireGuard), TLS no agrega nada, y

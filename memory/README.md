@@ -59,4 +59,4 @@ Parte del learning-kit (piso `memory/`).
 
 ## Licencia
 
-Apache 2.0 — Positronica Labs.
+Apache 2.0, Positronica Labs.

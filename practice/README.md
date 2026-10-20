@@ -1,6 +1,6 @@
 # Hypatia
 
-**Adaptive learning for neurodivergent minds** — short sessions, clear feedback, and low-friction retries. Static HTML apps, no build step.
+**Adaptive learning for neurodivergent minds**: short sessions, clear feedback, and low-friction retries. Static HTML apps, no build step.
 
 ## Modules
 

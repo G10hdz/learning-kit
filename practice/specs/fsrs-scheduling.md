@@ -1,7 +1,7 @@
 # SPEC: Migración de SM-2 lite a FSRS en Flashcards
 
 Fecha: 2026-09-22
-Estado: aprobado 2026-09-22 — implementación en curso
+Estado: aprobado 2026-09-22; implementación en curso
 Módulo afectado: `Flashcards/index.html` (standalone, vanilla JS, localStorage)
 
 ## 1. Resultado para el usuario
@@ -171,7 +171,7 @@ vivir en config editable:
 w = [0.212, 1.2931, 2.3065, 8.2956, 6.4133, 0.8334, 3.0194, 0.001,
      1.8722, 0.1666, 0.796, 1.4835, 0.0614, 0.2629, 1.6483, 0.6014,
      1.8729, 0.5425, 0.0912, 0.0658, 0.1542]
-retencion_deseada = 0.9        # rango recomendado 0.75–0.95
+retencion_deseada = 0.9        # rango recomendado 0.75-0.95
 ivl_max = 36500 días
 pasos_learning = [1 min, 10 min]
 pasos_relearning = [10 min]
@@ -296,7 +296,7 @@ Eventos: cada llamada a `grade()` emite un `GradeEvent {cardId, grado, estadoPre
    fallback a defaults si el valor guardado no parsea o tiene longitud ≠ 21.
 3. **Pasos de (re)learning:** DECIDIDO `[1min, 10min]` learning / `[10min]`
    relearning (estilo Anki, configurables en `params`).
-4. **Combo de sesión:** DECIDIDO incluir — el usuario pidió máxima dopamina.
+4. **Combo de sesión:** DECIDIDO incluir. El usuario pidió máxima dopamina.
    ×1.1 por cada 5 aciertos consecutivos sin AGAIN, cap ×2. Tunable en params.
 5. **Niveles:** DECIDIDO fase 2 opcional; MVP = XP + racha + resumen.
 6. **Granularidad de `due`:** DECIDIDO timestamp ms (como hoy); fuzz ±5% solo
@@ -313,4 +313,4 @@ Eventos: cada llamada a `grade()` emite un `GradeEvent {cardId, grado, estadoPre
 - Preview engañosa en `learning` (muestra paso, no días): formatear `<1d` ya
   cubre el caso.
 
-GATE: approved 2026-09-22 — FSRS-6 + combo de sesión implementables.
+GATE: approved 2026-09-22. FSRS-6 + combo de sesión implementables.

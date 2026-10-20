@@ -1,4 +1,4 @@
-# Playbook de estudio — audiolibros y flashcards
+# Playbook de estudio: audiolibros y flashcards
 
 El camino corto de "tengo un libro" a "lo escucho y lo retengo" usando solo
 `nlm` + un vault de notas + las apps de `practice/`. Todo lo demas en el kit
@@ -67,7 +67,7 @@ scheduler decide cuando repasar cada carta. Ver `practice/specs/fsrs-scheduling.
 
 ## 4. Que aterrice en el vault
 
-El vault es solo una carpeta de Markdown — no hace falta API de Obsidian:
+El vault es solo una carpeta de Markdown; no hace falta API de Obsidian:
 
 ```
 ~/Obsidian/MiVault/

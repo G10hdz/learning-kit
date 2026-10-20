@@ -1,4 +1,4 @@
-# Modelo del diagrama playbook-loop.svg — flujo, topologia loop con hub.
+# Modelo del diagrama playbook-loop.svg: flujo, topologia loop con hub.
 # Estaciones = pasos del playbook; spokes = write-back al vault/memoria.
 hub:
   - { id: vault-memory, label: "Vault + ai-memory", kind: store,

@@ -1,12 +1,12 @@
 ---
-title: Learning Stack — sistema personal de aprendizaje operado por agentes
+title: Learning Stack: sistema personal de aprendizaje operado por agentes
 fecha: 2026-09-20
 estado: borrador compartible
 ---
 
 # Learning Stack
 
-Un sistema personal de aprendizaje donde los agentes no son el truco: son la tubería. La idea central es separar **cinco pisos** — adquisición, producción, práctica, memoria y superficie — y conectarlos con piezas chicas y auditables en vez de una app monolítica.
+Un sistema personal de aprendizaje donde los agentes no son el truco: son la tubería. La idea central es separar **cinco pisos** (adquisición, producción, práctica, memoria y superficie) y conectarlos con piezas chicas y auditables en vez de una app monolítica.
 
 ## La gran foto
 
@@ -41,7 +41,7 @@ AGENTES ── gateway con MCPs (memoria, grafo) + CLIs (nlm, acquire, sync)
 2. **Sync por lanes, no por todo.** `vault_sync` mapea directorios a namespaces (`20-Study` → `obsidian/study`, `coaching/` → `obsidian/coaching`). Los snapshots de archivo (`Imports/`) se excluyen: son historia, no memoria viva.
 3. **El estado de práctica se exporta como notas.** Los sistemas externos (coach, módulos) no se copian al vault: se registran como *external lanes* y sus `.md` se indexan directo desde su repo.
 4. **Los pasos grises son humanos deliberados.** La descarga desde fuentes shadow-library es manual por diseño: el pipeline genera el link de búsqueda, la persona decide, el archivo cae a un inbox. Lo que funciona, se compra físico.
-5. **Un registry declara los sistemas.** `learning.yaml` lista cada sistema con su piso, host, repo, acceso (CLI/MCP/API/archivo) y data tier — el equivalente de un `agents.yaml` para el aprendizaje.
+5. **Un registry declara los sistemas.** `learning.yaml` lista cada sistema con su piso, host, repo, acceso (CLI/MCP/API/archivo) y data tier, el equivalente de un `agents.yaml` para el aprendizaje.
 6. **Data tiers respetados.** Conversaciones privadas y datos de trabajo anonimizado tienen tier alto: entran a memoria solo donde corresponde y nunca a índices globales.
 
 ## Piezas del stack

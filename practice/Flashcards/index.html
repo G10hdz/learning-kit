@@ -71,7 +71,7 @@
     <div id="deck-bar" class="deck-bar"></div>
 
     <div class="progress-line">
-      <span id="pos-label">—</span>
+      <span id="pos-label">-</span>
       <span id="game-label"></span>
       <span id="known-label"></span>
     </div>
@@ -319,7 +319,7 @@
       document.querySelector('.card-nav').style.display = summaryVisible ? 'none' : '';
       document.querySelector('.hint').style.display = summaryVisible ? 'none' : '';
       if (summaryVisible) { renderSummary(); return; }
-      if (!order.length) { document.getElementById('pos-label').textContent = '—'; return; }
+      if (!order.length) { document.getElementById('pos-label').textContent = '-'; return; }
 
       const d = decks[deckId];
       const i = order[pos];

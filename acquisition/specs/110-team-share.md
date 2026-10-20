@@ -11,7 +11,7 @@ y migración PostgreSQL quedan fuera de este spec.
 
 ## Trabajo en paralelo
 
-### Track A — UI presentable (`src/founder_guide/http_api.py` + tests)
+### Track A: UI presentable (`src/founder_guide/http_api.py` + tests)
 
 - Citas con **título de la fuente** y **timestamp formateado** (`mm:ss`) en vez
   de URL cruda. Requiere threadear `title` desde `query.py` (ya hace join con
@@ -21,12 +21,12 @@ y migración PostgreSQL quedan fuera de este spec.
 - Scopes del `<select>` servidos por el backend (endpoint o inyección en el
   HTML), no hardcodeados.
 - Branding mínimo: favicon inline (emoji SVG), jerarquía visual de respuesta
-  vs. citas, responsive básico. Sin frameworks, sin build step — mismo patrón
+  vs. citas, responsive básico. Sin frameworks, sin build step; mismo patrón
   de HTML inline en `_UI_HTML`.
 - Tests: actualizar/extend `tests/test_acceptance.py` para el nuevo payload
   de citas (title presente, startSeconds intacto).
 
-### Track B — README de onboarding (`README.md`)
+### Track B: README de onboarding (`README.md`)
 
 - Qué es, requisitos (Python 3.11+, yt-dlp opcional para live).
 - Setup: venv + `pip install -e .[live]`.

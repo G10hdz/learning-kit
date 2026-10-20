@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// validate-bank.mjs — verifica que cada módulo cargue su banco sin errores de schema.
+// validate-bank.mjs: verifica que cada módulo cargue su banco sin errores de schema.
 // Uso: node scripts/validate-bank.mjs   (corre desde la raíz del repo)
 import { readdirSync, readFileSync, existsSync } from 'fs';
 import { join } from 'path';

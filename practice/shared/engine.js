@@ -1,4 +1,4 @@
-    // Hypatia shared engine — cada módulo configura via window.HYPATIA_MODULE (module.js)
+    // Hypatia shared engine: cada módulo configura via window.HYPATIA_MODULE (module.js)
     const MOD = window.HYPATIA_MODULE || {};
     const MODID = MOD.id || "module";
     const P = MOD.storagePrefix || `${MODID}.`;
@@ -41,7 +41,7 @@
         <div style="max-width:600px;margin:60px auto;padding:32px;background:#1a1d1d;border-radius:16px;color:#e1e3e2;font-family:sans-serif;">
           <h2 style="color:#ff6b9d;">⚠️ ${MODID}: questions no cargaron</h2>
           <p style="color:#9a9ca0;margin:16px 0;">Los archivos de preguntas no se cargaron correctamente.</p>
-          <p style="color:#9a9ca0;">Sirve el repo con un servidor local (<code style="background:#2a2d2d;padding:2px 8px;border-radius:4px;">python3 -m http.server</code>) — abrir file:// bloquea scripts.</p>
+          <p style="color:#9a9ca0;">Sirve el repo con un servidor local (<code style="background:#2a2d2d;padding:2px 8px;border-radius:4px;">python3 -m http.server</code>); abrir file:// bloquea scripts.</p>
         </div>`;
     } else {
       console.log(`[${MODID}] ${window.QUESTIONS.length} questions loaded`);
@@ -1285,7 +1285,7 @@
         if (!existing) {
           const msg = document.createElement("div");
           msg.className = "simulacro-timeout-msg";
-          msg.textContent = "Se acabó el tiempo — así se siente el examen real.";
+          msg.textContent = "Se acabó el tiempo; así se siente el examen real.";
           msg.style.cssText = "color:#ff4757;font-size:0.85rem;font-weight:600;margin-top:4px;";
           metaLine.appendChild(msg);
         }
@@ -1342,7 +1342,7 @@
           })
           .filter(Boolean)
           .sort((a, b) => {
-            // Oldest failure first — true spaced repetition
+            // Oldest failure first: true spaced repetition
             if (a._lastWrongAt !== b._lastWrongAt) return a._lastWrongAt - b._lastWrongAt;
             return b._wrongCount - a._wrongCount;
           });
@@ -1361,7 +1361,7 @@
         const blockSize = Math.min(15, pool.length);
         questions = shuffle(pool).slice(0, blockSize);
         const topicLabel = state.lastSelectedTopic || "todos los temas";
-        label = `${topicLabel} — ${subjectLabel(subject)} (${blockSize} preguntas)`;
+        label = `${topicLabel}: ${subjectLabel(subject)} (${blockSize} preguntas)`;
         state.lastSelectedSubject = subject;
       } else {
         // Subject mode (existing behavior)
@@ -1686,7 +1686,7 @@
       if (flagged.includes(question.id)) {
         els.reportAnswerBtn.disabled = true;
         els.reportAnswerBtn.classList.add("reported");
-        els.reportAnswerStatus.textContent = "Ya reportada — gracias por el feedback.";
+        els.reportAnswerStatus.textContent = "Ya reportada, gracias por el feedback.";
         els.reportAnswerStatus.style.display = "block";
       } else {
         els.reportAnswerBtn.disabled = false;
@@ -1794,10 +1794,10 @@
       // Motivational banner for good scores
       if (els.reportBanner) {
         const GOOD_MESSAGES = [
-          `${currentAvatar.emoji} ¡Eso es, ${currentAvatar.name}! ${report.accuracy}% — sigues subiendo. 🚀`,
-          `${currentAvatar.emoji} ACIERTO. ${report.correct}/${report.total} — nivel ${currentAvatar.name} desbloqueado 🔓`,
+          `${currentAvatar.emoji} ¡Eso es, ${currentAvatar.name}! ${report.accuracy}%, sigues subiendo. 🚀`,
+          `${currentAvatar.emoji} ACIERTO. ${report.correct}/${report.total}: nivel ${currentAvatar.name} desbloqueado 🔓`,
           `${currentAvatar.emoji} ¡Modo bestia activado! ${report.accuracy}% de precisión. Imparable. ⚡`,
-          `${currentAvatar.emoji} ${report.accuracy}% — este bloque fue tuyo. Eso es racha. 🔥`
+          `${currentAvatar.emoji} ${report.accuracy}%, este bloque fue tuyo. Eso es racha. 🔥`
         ];
         if (report.accuracy >= 80) {
           els.reportBanner.textContent = GOOD_MESSAGES[Math.floor(Math.random() * GOOD_MESSAGES.length)];
@@ -2029,7 +2029,7 @@
           flagAnswer(q.id);
           els.reportAnswerBtn.disabled = true;
           els.reportAnswerBtn.classList.add("reported");
-          els.reportAnswerStatus.textContent = "Reportada — gracias por el feedback!";
+          els.reportAnswerStatus.textContent = "Reportada, gracias por el feedback!";
           els.reportAnswerStatus.style.display = "block";
         }
       });
@@ -2259,7 +2259,7 @@
       list.innerHTML = videos.map(video => `
         <div class="video-ref-item">
           <a href="${video.url}" target="_blank" rel="noopener">▶ ${video.title}</a>
-          <span class="channel">— ${video.channel}</span>
+          <span class="channel">- ${video.channel}</span>
         </div>
       `).join('');
 

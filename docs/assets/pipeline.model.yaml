@@ -1,4 +1,4 @@
-# Modelo del diagrama pipeline.svg — contenedores, topologia pipeline.
+# Modelo del diagrama pipeline.svg: contenedores, topologia pipeline.
 # Todo nodo y arista traza a learning.yaml (systems[].flows_to) o al README.
 nodes:
   - { id: fuentes,     label: Fuentes,        kind: input,    src: "README.md#quickstart" }

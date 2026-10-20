@@ -1,4 +1,4 @@
-"""Search engine — embed queries and search ChromaDB."""
+"""Search engine: embed queries and search ChromaDB."""
 
 import logging
 from dataclasses import dataclass
