@@ -11,8 +11,8 @@ captions opcionales.
 | `acquisition/` | Python >= 3.11 + uv/pip | fastapi, uvicorn, httpx, youtube-transcript-api | `live`: yt-dlp; `books`: PyMuPDF, ebooklib; TranscriptAPI key |
 | `production/` | bash + Python 3 + `nlm` | `nlm` CLI + cuenta Google NotebookLM | pdflatex (PDFs), Calibre CWA via `CALIBRE_HOST` |
 | `practice/` | nada (HTML/JS estatico) | navegador | node para los scripts de validacion |
-| `memory/` | Python 3 stdlib | — | un CLI `ai-memory` (backbone MCP propio, opcional); Obsidian = solo una carpeta |
-| `memory/embeddings/` | Python 3 + chromadb | `ollama pull bge-m3` u `OPENROUTER_API_KEY` | — |
+| `memory/` | Python 3 stdlib | n/a | un CLI `ai-memory` (backbone MCP propio, opcional); Obsidian = solo una carpeta |
+| `memory/embeddings/` | Python 3 + chromadb | `ollama pull bge-m3` u `OPENROUTER_API_KEY` | n/a |
 | `surface/` | bash, python3 | tailscale (para publicar en tailnet) | node + player pr-explainer (explainers) |
 
 ---
@@ -25,8 +25,8 @@ Todo lo que el kit referencia es publico y cada quien instala su copia:
 | --- | --- | --- |
 | Python >= 3.11 | todo el kit | python.org |
 | `uv` | venvs + instalar CLIs | `curl -LsSf https://astral.sh/uv/install.sh \| sh` |
-| `nlm` | NotebookLM: libretas, audio, flashcards, quiz | [gemini-notebook-mcp-cli](https://github.com/jacob-bd/gemini-notebook-mcp-cli) — `uv tool install notebooklm-mcp-cli` |
-| Ollama + `bge-m3` | embeddings locales de `memory/embeddings/` | ollama.com — `ollama pull bge-m3` |
+| `nlm` | NotebookLM: libretas, audio, flashcards, quiz | [gemini-notebook-mcp-cli](https://github.com/jacob-bd/gemini-notebook-mcp-cli). `uv tool install notebooklm-mcp-cli` |
+| Ollama + `bge-m3` | embeddings locales de `memory/embeddings/` | ollama.com. `ollama pull bge-m3` |
 | ChromaDB | store vectorial | viene en `memory/embeddings/requirements.txt` |
 | Obsidian | leer/escribir el vault | obsidian.md (opcional: el vault es solo una carpeta) |
 | Tailscale | servir `surface/` en tu red | tailscale.com (opcional) |
@@ -37,10 +37,10 @@ Todo lo que el kit referencia es publico y cada quien instala su copia:
 ## Base (una sola vez)
 
 ```sh
-# uv — package/runner de python que tambien instala CLIs
+# uv: package/runner de python que tambien instala CLIs
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# nlm — CLI de NotebookLM (libretas, fuentes, audio overviews)
+# nlm: CLI de NotebookLM (libretas, fuentes, audio overviews)
 uv tool install notebooklm-mcp-cli
 nlm login          # auth interactiva con tu Google; cookies caducan cada pocas semanas
 nlm doctor         # verifica
@@ -53,7 +53,7 @@ Comandos de estudio que ya trae `nlm` (ver `docs/playbook-estudio.md`):
 `nlm mindmap create`, `nlm report create` (study guide), `nlm download`
 (baja los artefactos), `nlm research` (descubre fuentes).
 
-## acquisition/ — founder-guide
+## acquisition/: founder-guide
 
 ```sh
 cd acquisition
@@ -62,22 +62,22 @@ uv pip install -e '.[live]'             # + yt-dlp si vas a ingerir YouTube en v
 uv pip install -e '.[books]'            # + epub/pdf de libros
 ```
 
-- `scripts/acquire.py` — catalogo markdown -> inbox -> Calibre -> NotebookLM.
+- `scripts/acquire.py`: catalogo markdown -> inbox -> Calibre -> NotebookLM.
   Catalogo en `docs/book-candidates.md`, archivos en `vault/sources/files/`
   (se crea solo, gitignored).
-- `scripts/mcp_server.py` — bridge MCP read-only sobre la API del proyecto.
+- `scripts/mcp_server.py`: bridge MCP read-only sobre la API del proyecto.
 - Calibre: define `CALIBRE_HOST` (host ssh con Calibre-Web-Automated en
   docker, `~/cwa/ingest/` como drop dir) para `push-calibre`. Sin la var, el
   resto funciona igual.
-- `TRANSCRIPT_API_KEY` — provider de captions en live (evita el IP ban de
+- `TRANSCRIPT_API_KEY`: provider de captions en live (evita el IP ban de
   YouTube). `.env.example` -> `.env`.
 - **Resolvers plugin**: `.py` en `~/.config/founder-guide/resolvers/` (o
   `$FOUNDER_GUIDE_RESOLVER_DIR`). Ejemplo incluido: `plugins/libgen.py`
-  genera el link de busqueda en LibGen para el paso humano — la descarga es
+  genera el link de busqueda en LibGen para el paso humano; la descarga es
   manual por diseño (ver `plugins/README.md`).
 - Tests: `.venv/bin/python -m unittest discover -s tests -v`.
 
-## production/ — capital-cultural
+## production/: capital-cultural
 
 Convierte libretas NotebookLM en briefs diarios `.tex`/PDF y audiolibros
 narrados. Sigue `production/AGENTS.md` (fuente de verdad + definicion de
@@ -96,7 +96,7 @@ nlm login                                # requisito duro
 - `docs/notebooklm-ingestion.md` documenta todos los comandos `nlm` usados,
   con fallback manual por si caduca la sesion.
 
-## practice/ — hypatia
+## practice/: hypatia
 
 Cero instalacion: apps HTML/JS estaticas.
 
@@ -105,16 +105,16 @@ open practice/index.html                 # o
 python3 -m http.server -d practice 8000
 ```
 
-- `Flashcards/` — motor FSRS-6 (`fsrs.js`) + decks en `decks/*.js`. Deck nuevo =
+- `Flashcards/`: motor FSRS-6 (`fsrs.js`) + decks en `decks/*.js`. Deck nuevo =
   archivo `mi-deck.js` con `window.FLASHCARD_DECKS["mi-deck"] = {...}` (ver
   formato en `decks/fde.js`).
-- `CubPrep`, `MLOps`, `SAA-C03` — modulos quiz por materia, bancos en
+- `CubPrep`, `MLOps`, `SAA-C03`: modulos quiz por materia, bancos en
   `questions_by_materia/*.js`.
 - Validacion (opcional, requiere node):
   `node scripts/validate-bank.mjs && node scripts/test-fsrs.mjs`.
 - Spec del scheduler: `specs/fsrs-scheduling.md`.
 
-## memory/ — vault-sync
+## memory/: vault-sync
 
 **Opcional.** `vault_sync.py` escribe en un backbone de memoria via el CLI
 `ai-memory` (`ai-memory store` con namespaces por lane). Ese CLI es una pieza
@@ -134,7 +134,7 @@ python3 memory/vault_sync.py
   `~/.cache/vault-sync/state.json`.
 - Tests: `python3 -m unittest memory/tests/test_vault_sync.py` (stdlib).
 
-### embeddings/ — busqueda semantica del vault
+### embeddings/: busqueda semantica del vault
 
 ```sh
 cd memory/embeddings
@@ -149,7 +149,7 @@ ollama pull bge-m3
 Providers: `ollama` (local, bge-m3) u `openrouter` (nube, API key). Cada uno
 en su coleccion ChromaDB propia.
 
-## surface/ — hub web en tu tailnet
+## surface/: hub web en tu tailnet
 
 ```sh
 cd surface

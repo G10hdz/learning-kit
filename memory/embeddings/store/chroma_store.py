@@ -96,7 +96,7 @@ class ChromaStore:
                 return 0
             return len(result) if isinstance(result, list) else 1
         except Exception as e:
-            # ChromaDB raises if nothing matches — that's fine
+            # ChromaDB raises if nothing matches; that's fine
             logger.debug("Delete by filter (may be empty): %s", e)
             return 0
 

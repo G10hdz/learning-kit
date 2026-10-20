@@ -1,4 +1,4 @@
-// MLOps module config — engine lo lee via window.HYPATIA_MODULE
+// MLOps module config: engine lo lee via window.HYPATIA_MODULE
 window.HYPATIA_MODULE = {
   id: "mlops",
   storagePrefix: "mlops.",

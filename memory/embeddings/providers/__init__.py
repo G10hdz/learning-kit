@@ -58,7 +58,7 @@ def get_provider(
             "Check OPENROUTER_API_KEY and network connectivity."
         )
 
-    # "auto" — try Ollama first, then OpenRouter.
+    # "auto": try Ollama first, then OpenRouter.
     ollama = OllamaProvider(
         endpoint=ollama_endpoint, model=ollama_model, timeout=ollama_timeout
     )

@@ -2,7 +2,7 @@
 
 Piso **surface** del learning-kit: hub web móvil servido dentro de la
 tailnet. Junta las apps de práctica en un solo lugar alcanzable desde
-teléfono, tablet y compu — sin exponer nada a internet público.
+teléfono, tablet y compu, sin exponer nada a internet público.
 
 ```
 scripts/bundle.sh   # construye site/: hub + ai-coach dist + apps Hypatia + explainers
@@ -30,4 +30,4 @@ Parte del learning-kit: ver `../REQUIREMENTS.md`.
 
 ## Licencia
 
-Apache 2.0 — Positronica Labs.
+Apache 2.0, Positronica Labs.

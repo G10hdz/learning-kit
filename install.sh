@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# install.sh — deja el kit listo por pisos. Idempotente; corre lo que falte.
+# install.sh: deja el kit listo por pisos. Idempotente; corre lo que falte.
 #
 #   ./install.sh          instala todo lo disponible
 #   ./install.sh check    solo verifica requisitos, no instala nada
@@ -15,9 +15,9 @@ have() { command -v "$1" >/dev/null 2>&1; }
 
 say "requisitos base"
 have python3 && ok "python3 $(python3 --version 2>&1 | awk '{print $2}')" || miss "python3 FALTA (>=3.11)"
-have uv      && ok "uv"      || miss "uv no esta — instala: curl -LsSf https://astral.sh/uv/install.sh | sh"
+have uv      && ok "uv"      || miss "uv no esta. Instala: curl -LsSf https://astral.sh/uv/install.sh | sh"
 have node    && ok "node $(node --version 2>/dev/null)" || miss "node no esta (solo hace falta para explainers/tests de practice)"
-have nlm     && ok "nlm $(nlm --version 2>/dev/null | head -1)" || miss "nlm no esta — instala: uv tool install notebooklm-mcp-cli && nlm login"
+have nlm     && ok "nlm $(nlm --version 2>/dev/null | head -1)" || miss "nlm no esta. Instala: uv tool install notebooklm-mcp-cli && nlm login"
 have pdflatex && ok "pdflatex" || miss "pdflatex no esta (opcional, compila los briefs: brew install --cask mactex / apt install texlive)"
 
 [ "$CHECK_ONLY" = "check" ] && exit 0
@@ -42,7 +42,7 @@ say "memory/ (vault-sync)"
 if [ ! -f "$HOME/.config/vault-sync/config.json" ]; then
   mkdir -p "$HOME/.config/vault-sync"
   cp "$ROOT/memory/config.example.json" "$HOME/.config/vault-sync/config.json"
-  ok "config ejemplo en ~/.config/vault-sync/config.json — editala con tus rutas"
+  ok "config ejemplo en ~/.config/vault-sync/config.json. Editala con tus rutas"
 else
   ok "config ya existe"
 fi

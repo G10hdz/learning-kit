@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// test-fsrs.mjs — tabla de verdad del motor FSRS-6 (specs/fsrs-scheduling.md
+// test-fsrs.mjs: tabla de verdad del motor FSRS-6 (specs/fsrs-scheduling.md
 // §4-§7) más un smoke del script de index.html contra un DOM stub.
 // Uso: node scripts/test-fsrs.mjs   (sin dependencias)
 import { createRequire } from 'module';

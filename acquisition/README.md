@@ -5,7 +5,7 @@ similares) y libros. Ingiere fuentes, las segmenta con citas al segundo exacto y
 responde preguntas en lenguaje natural ancladas a esas fuentes. Expone una API
 FastAPI y una UI interna mínima.
 
-**Estado actual:** funciona en local (tests verdes, SPECs 001–006 + tracks de
+**Estado actual:** funciona en local (tests verdes, SPECs 001-006 + tracks de
 vault/búsqueda en `specs/`). Pendiente deploy y el piloto de 20 videos YC
 (bloqueado por IP ban de YouTube, ver [Pendientes](#pendientes-conocidos)).
 
@@ -110,7 +110,7 @@ Nota: `yt-dlp` debe estar en el `PATH` para el catálogo live (con
 
 - Deploy público y auth real (Cloudflare Access).
 - Piloto de 20 videos YC/Platanus: catálogo ya probado, ingesta bloqueada por
-  IP ban de YouTube — requiere `TRANSCRIPT_API_KEY` en `.env`.
+  IP ban de YouTube; requiere `TRANSCRIPT_API_KEY` en `.env`.
 - PostgreSQL FTS (hoy SQLite), Gemini, MCP.
 - Idempotency-Key replay cache (el header se acepta, sin replay aún).
 

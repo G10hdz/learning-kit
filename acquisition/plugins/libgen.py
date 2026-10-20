@@ -6,7 +6,7 @@ preferida) y cada instalacion decide que fuentes resuelve.
 
 Nota honesta: LibGen es una biblioteca sombra; descargar libros con copyright
 infringe leyes en la mayoria de jurisdicciones. Esto es solo un bookmark de
-busqueda — el uso que le des es tu responsabilidad.
+busqueda; el uso que le des es tu responsabilidad.
 """
 
 import re

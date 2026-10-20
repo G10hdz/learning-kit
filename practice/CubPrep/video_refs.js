@@ -234,7 +234,7 @@ window.VIDEO_REFS = {
   ],
 
   // ============================================================================
-  // PHYSICS (9 topics) — 50% of exam weight
+  // PHYSICS (9 topics): 50% of exam weight
   // ============================================================================
   
   "fis_cinematica": [
@@ -480,7 +480,7 @@ window.VIDEO_REFS = {
   ],
 
   // ============================================================================
-  // CHEMISTRY (8 topics) — 50% of exam weight
+  // CHEMISTRY (8 topics): 50% of exam weight
   // ============================================================================
   
   "qui_basicos": [
@@ -698,7 +698,7 @@ window.VIDEO_REFS = {
   ],
 
   // ============================================================================
-  // LEGACY FALLBACK — Maps old custom tags to official tags
+  // LEGACY FALLBACK: Maps old custom tags to official tags
   // Used for backward compatibility with older code
   // ============================================================================
   

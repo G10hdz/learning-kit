@@ -1817,7 +1817,7 @@
         <div class="grid">
           <article class="panel summary-panel">
             <h2>Your progress</h2>
-            <p>Stats saved in localStorage — pick up exactly where you left off.</p>
+            <p>Stats saved in localStorage: pick up exactly where you left off.</p>
             <div class="stats-grid">
               <div class="stat-card">
                 <span>Current streak</span>
@@ -2138,7 +2138,7 @@
           </div>
 
           <div id="topic-breakdown-section" style="display:none;margin-top:16px;">
-            <small style="color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-size:0.7rem;">By topic — worst to best</small>
+            <small style="color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-size:0.7rem;">By topic, worst to best</small>
             <ul id="topic-breakdown-list" class="list" style="margin-top:8px;"></ul>
           </div>
 
@@ -2193,7 +2193,7 @@
       const needle = question.tema.toLowerCase().trim();
       const data = window.ENHANCED_EXPLANATIONS;
       // data can be { domains: { [domain]: { [topic]: { docUrl, videos } } } }
-      // or a flat { [topic]: { docUrl, videos } } — handle both
+      // or a flat { [topic]: { docUrl, videos } }: handle both
       let topicData = null;
       if (data.domains) {
         for (const domain of Object.values(data.domains)) {
@@ -3377,7 +3377,7 @@
     }
 
     const TIMER_RING_CIRCUMFERENCE = 81.68; // 2 * PI * 13
-    const TARGET_TIME_PER_QUESTION = 120; // seconds — 130 min / 65 questions
+    const TARGET_TIME_PER_QUESTION = 120; // seconds: 130 min / 65 questions
 
     function startTimer() {
       stopTimer();
@@ -3474,7 +3474,7 @@
           })
           .filter(Boolean)
           .sort((a, b) => {
-            // Oldest failure first — true spaced repetition
+            // Oldest failure first: true spaced repetition
             if (a._lastWrongAt !== b._lastWrongAt) return a._lastWrongAt - b._lastWrongAt;
             return b._wrongCount - a._wrongCount;
           });
@@ -3493,7 +3493,7 @@
         const blockSize = Math.min(15, pool.length);
         questions = shuffle(pool).slice(0, blockSize);
         const topicLabel = state.lastSelectedTopic || "todos los temas";
-        label = `${topicLabel} — ${subjectLabel(subject)} (${blockSize} preguntas)`;
+        label = `${topicLabel}: ${subjectLabel(subject)} (${blockSize} preguntas)`;
         state.lastSelectedSubject = subject;
       } else {
         // Subject mode (existing behavior)
@@ -3834,7 +3834,7 @@
       if (flagged.includes(question.id)) {
         els.reportAnswerBtn.disabled = true;
         els.reportAnswerBtn.classList.add("reported");
-        els.reportAnswerStatus.textContent = "Already reported — thanks for the feedback.";
+        els.reportAnswerStatus.textContent = "Already reported, thanks for the feedback.";
         els.reportAnswerStatus.style.display = "block";
       } else {
         els.reportAnswerBtn.disabled = false;
@@ -3938,10 +3938,10 @@
       // Motivational banner for good scores
       if (els.reportBanner) {
         const GOOD_MESSAGES = [
-          `${currentAvatar.emoji} That's it, ${currentAvatar.name}! ${report.accuracy}% — keep climbing. 🚀`,
-          `${currentAvatar.emoji} LOCKED IN. ${report.correct}/${report.total} — ${currentAvatar.name} mode unlocked 🔓`,
+          `${currentAvatar.emoji} That's it, ${currentAvatar.name}! ${report.accuracy}%, keep climbing. 🚀`,
+          `${currentAvatar.emoji} LOCKED IN. ${report.correct}/${report.total}: ${currentAvatar.name} mode unlocked 🔓`,
           `${currentAvatar.emoji} Beast mode! ${report.accuracy}% accuracy. SAA-C03 is yours. ⚡`,
-          `${currentAvatar.emoji} ${report.accuracy}% — that block was yours. That's a streak. 🔥`
+          `${currentAvatar.emoji} ${report.accuracy}%, that block was yours. That's a streak. 🔥`
         ];
         if (report.accuracy >= 80) {
           els.reportBanner.textContent = GOOD_MESSAGES[Math.floor(Math.random() * GOOD_MESSAGES.length)];
@@ -4197,7 +4197,7 @@
           flagAnswer(q.id);
           els.reportAnswerBtn.disabled = true;
           els.reportAnswerBtn.classList.add("reported");
-          els.reportAnswerStatus.textContent = "Reported — thanks for the feedback!";
+          els.reportAnswerStatus.textContent = "Reported, thanks for the feedback!";
           els.reportAnswerStatus.style.display = "block";
         }
       });

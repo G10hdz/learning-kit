@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# bundle.sh — construye site/ con el hub + las apps de practice.
+# bundle.sh: construye site/ con el hub + las apps de practice.
 #
 #   AI_COACH_DIR   repo ai-coach opcional (default <kit>/practice-coach si existe)
 #   HYPATIA_DIR    apps estaticas    (default <kit>/practice)

@@ -40,7 +40,7 @@ Repo: piso `acquisition/` del learning-kit
 ### Hecho y verde
 
 - Dominio offline: catálogo, transcript, ingest, search, answer, notes/scope/stage.
-- SPECs 001–006 de `ARCHITECTURE_SPEC.md` con tests de aceptación.
+- SPECs 001-006 de `ARCHITECTURE_SPEC.md` con tests de aceptación.
 - SQLite write-through (`--db`).
 - FastAPI mínimo + UI pregunta/citas.
 - CLI: `demo`, `catalog-channel`, `ingest-video`, `ingest-pending`, `add-note`, `serve`, `verify-corpus`.
@@ -54,7 +54,7 @@ Repo: piso `acquisition/` del learning-kit
 1. Respuestas **extractivas** con **citas** (no alucinar corpus).
 2. `insufficient_evidence` cuando no hay hits.
 3. Procedencia de transcript (`manual` / `automatic`).
-4. Segmentos acotados (hoy 60–120s en video).
+4. Segmentos acotados (hoy 60-120s en video).
 5. Tests sin red en la suite default.
 6. Secretos fuera de git (`.env`).
 
@@ -116,7 +116,7 @@ Cada **obra o tema** es una carpeta:
 | README.md | onboarding | link | bajo | opcional |
 | full.md | lectura | raro | sí (o via chunks) | **principal** |
 | mini.md | cheat sheet | **default** | opcional | opcional |
-| nano.md | — | contexto justo | no | no |
+| nano.md | n/a | contexto justo | no | no |
 | chunks/* | no | no | **cita atómica** | no |
 
 Regla: **full es la verdad editorial**. mini/nano se derivan (proceso semi-manual o asistido). chunks se generan por ingest y no se editan a mano salvo corrección de OCR.
@@ -142,7 +142,7 @@ Soportar al menos: **PDF**, **EPUB**, **MD** ya limpio.
 1. **Extract** texto (PDF: PyMuPDF o similar; EPUB: ebooklib; MD: passthrough).
 2. **Normalize** espacios, saltos de página → marcadores, basura de headers/footers.
 3. **Structure** detectar capítulos/headings si existen; si no, ventanas por tokens.
-4. **Chunk** ~800–1200 tokens, overlap pequeño; preferir límites de sección.
+4. **Chunk** ~800-1200 tokens, overlap pequeño; preferir límites de sección.
 5. **Write vault** `_meta.yaml`, `full.md` (o full ensamblado), `chunks/NNN.md` con frontmatter.
 6. **Index** en store del guide: `source_type=book`, citation estable.
 7. **No** commitear PDF/EPUB comerciales al remoto público. `_raw/` + gitignore o vault privado.
@@ -196,7 +196,7 @@ Salida: texto extractivo + lista de citas (path, book_id/video_id, pages o t=).
 - Nombre tentativo: `vault` / `team-knowledge`.
 - Trigger: dudas de negocio, diseño, AI de producto, lineamientos.
 - Acción: invocar CLI o librería; devolver respuesta + paths `[[wikilinks]]` si aplica.
-- Límite: cargar como máximo 1–2 `nano`/`mini` de `04-codigo` en tareas de código; no volcar el vault entero al system prompt.
+- Límite: cargar como máximo 1-2 `nano`/`mini` de `04-codigo` en tareas de código; no volcar el vault entero al system prompt.
 
 ### UI
 
@@ -292,43 +292,43 @@ Respuesta sigue siendo extractiva + citas; el embedding solo mejora ranking/reca
 
 ## 14. Fases de implementación
 
-### Fase 0 — Documento y repos (esta entrega)
+### Fase 0: Documento y repos (esta entrega)
 
 - [x] Este doc.
 - [ ] Azol: ADR corto (Nygard) con decisión repo mono vs split + layout final.
 - [ ] Track paralelo: lista de libros (ver §15).
 
-### Fase 1 — Esqueleto vault
+### Fase 1: Esqueleto vault
 
 - Crear árbol de secciones + 1 nota seed por sección.
 - `00-general/README.md` (cómo contribuir, licencias, cómo preguntar).
 - Abrir en Obsidian y validar wikilinks básicos.
 - `.gitignore`: `_raw/`, PDFs, `.env`.
 
-### Fase 2 — ingest-book
+### Fase 2: ingest-book
 
 - CLI `ingest-book` + tests con fixture PDF/MD chico (sin red).
 - chunks + index SQLite.
 - `guide q` o search unificado devuelve cita de libro.
 
-### Fase 3 — Unificar video + book en answer
+### Fase 3: Unificar video + book en answer
 
 - Mismo endpoint/CLI para ambos `source_type`.
 - Piloto YC 20 con TranscriptAPI (key en `.env`).
 - verify-corpus ampliado (issues si book sin chunks, etc.).
 
-### Fase 4 — Skill + export NotebookLM
+### Fase 4: Skill + export NotebookLM
 
 - Skill del vault.
 - `export-notebooklm` por sección.
 - Prueba manual de Audio Overview en un notebook.
 
-### Fase 5 — Higiene y escala
+### Fase 5: Higiene y escala
 
 - Embeddings hybrid si lexical falla en preguntas reales del equipo.
 - MCP Obsidian opcional.
 - Automatización NotebookLM solo si el export manual duele.
-- Destilados mini/nano para 04-codigo (ciembor) y 1–2 libros de negocio.
+- Destilados mini/nano para 04-codigo (ciembor) y 1-2 libros de negocio.
 
 ## 15. Track paralelo: búsqueda de libros
 
@@ -343,10 +343,10 @@ Archivo propuesto: `docs/BOOK_CANDIDATES.md` (o sheet) con columnas:
 
 ### Cupo inicial sugerido
 
-- **01-startup-negocio:** 5–8 (validación, lean, ventas/outbound, pricing, teams, fundraising).
-- **02-diseno:** 3–5 (producto, UX research, visual/systems si aplica).
-- **03-ai:** 3–5 (mental models AI, builders, evals/RAG prácticos; preferir textos actualizables + notas propias).
-- **04-codigo:** no hace falta “ingerir” Clean Code entero si se usa destilado tipo agent-rules-books; listar 2–3 de cabecera + link al rule set.
+- **01-startup-negocio:** 5-8 (validación, lean, ventas/outbound, pricing, teams, fundraising).
+- **02-diseno:** 3-5 (producto, UX research, visual/systems si aplica).
+- **03-ai:** 3-5 (mental models AI, builders, evals/RAG prácticos; preferir textos actualizables + notas propias).
+- **04-codigo:** no hace falta “ingerir” Clean Code entero si se usa destilado tipo agent-rules-books; listar 2-3 de cabecera + link al rule set.
 
 ### Criterios de selección
 
@@ -359,7 +359,7 @@ Archivo propuesto: `docs/BOOK_CANDIDATES.md` (o sheet) con columnas:
 
 - Startup/negocio: The Mom Test; Traction; Inspired; The Cold Start Problem; libros/notas de sales que ya usen.
 - Diseño: Inspired (solapa producto); Hooked o equivalentes que el equipo avale; design systems primer del equipo (notas propias > libro genérico).
-- AI: apuntes internos de uso de modelos + 1–2 textos buenos de prompting/RAG; evitar “AI bestseller” vacío.
+- AI: apuntes internos de uso de modelos + 1-2 textos buenos de prompting/RAG; evitar “AI bestseller” vacío.
 - Código: agent-rules-books / rules-books interno; DDIA o APoSD vía mini rules, no PDF pirata.
 
 ## 16. Brief para Azol (arquitectura)
@@ -405,12 +405,12 @@ Archivo propuesto: `docs/BOOK_CANDIDATES.md` (o sheet) con columnas:
 
 ## 19. Referencias
 
-- `ARCHITECTURE_SPEC.md` — motor guide original (video, SPECs).  
-- `HANDOFF.md` — estado de implementación actual.  
-- https://github.com/ciembor/agent-rules-books — patrón rules full/mini/nano.  
-- https://github.com/coddingtonbear/obsidian-local-rest-api — API local Obsidian.  
-- https://transcriptapi.com/docs/api/ — captions YT managed.  
-- https://pypi.org/project/notebooklm-mcp-cli/ — automatización NL (evaluar después).
+- `ARCHITECTURE_SPEC.md`: motor guide original (video, SPECs).  
+- `HANDOFF.md`: estado de implementación actual.  
+- https://github.com/ciembor/agent-rules-books: patrón rules full/mini/nano.  
+- https://github.com/coddingtonbear/obsidian-local-rest-api: API local Obsidian.  
+- https://transcriptapi.com/docs/api/: captions YT managed.  
+- https://pypi.org/project/notebooklm-mcp-cli/: automatización NL (evaluar después).
 
 ---
 

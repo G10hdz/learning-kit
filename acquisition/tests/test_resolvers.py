@@ -3,7 +3,7 @@
 El punto del seam es el aislamiento: sin plugin instalado `pending` debe
 funcionar con el fallback público; un plugin roto (al importar o al
 resolver) no puede tumbar la cadena; y ningún test puede depender del
-plugin privado — se crean plugins fixture en tmp_path.
+plugin privado; se crean plugins fixture en tmp_path.
 """
 
 import sys

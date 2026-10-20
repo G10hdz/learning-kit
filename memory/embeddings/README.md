@@ -58,7 +58,7 @@ embedding.
 | Var | Default | Uso |
 |---|---|---|
 | `EMBEDDING_PROVIDER` | `ollama` | `ollama` / `openrouter` |
-| `OPENROUTER_API_KEY` | — | Requerida para openrouter |
+| `OPENROUTER_API_KEY` | n/a | Requerida para openrouter |
 | `OLLAMA_MODEL` | `bge-m3` | Modelo local |
 | `VAULT_PATHS` | `~/Obsidian/MyVault` | Vaults separados por coma |
 | `CHROMA_PERSIST_DIR` | `~/.hermes/embeddings/obsidian-chroma` | Store vectorial |

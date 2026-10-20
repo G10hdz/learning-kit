@@ -1,4 +1,4 @@
-"""Vault indexer — orchestrates file discovery, chunking, embedding, and storage."""
+"""Vault indexer: orchestrates file discovery, chunking, embedding, and storage."""
 
 import json
 import logging
@@ -55,7 +55,7 @@ class VaultIndexer:
 
         Returns stats dict.
         """
-        logger.info("Full index — rebuilding all vaults...")
+        logger.info("Full index: rebuilding all vaults...")
         self.chroma_store.reset_collection()
 
         total_files = 0
@@ -110,7 +110,7 @@ class VaultIndexer:
 
         Returns stats dict.
         """
-        logger.info("Incremental update — checking for changes...")
+        logger.info("Incremental update: checking for changes...")
 
         total_changed = 0
         total_chunks = 0

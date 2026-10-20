@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Obsidian Vault Semantic Indexing — CLI Entry Point
+Obsidian Vault Semantic Indexing: CLI Entry Point
 
 Usage:
     python index_vaults.py --full                                Full rebuild
@@ -105,7 +105,7 @@ def cmd_full(provider, chroma_store, vaults):
 
 
 def cmd_update(provider, chroma_store, vaults):
-    """Incremental update — only index changed files."""
+    """Incremental update: only index changed files."""
     chunker = _make_chunker()
     indexer = VaultIndexer(
         vault_paths=vaults,
@@ -134,7 +134,7 @@ def cmd_update(provider, chroma_store, vaults):
             for v in stats["vaults"].values()
         )
         if not any_changes:
-            print(f"\n  No files changed — nothing to update.")
+            print(f"\n  No files changed, nothing to update.")
         else:
             print(f"\n  Per vault:")
             for vname, vstats in stats["vaults"].items():
@@ -289,7 +289,7 @@ def main():
         logger.error("%s", e)
         sys.exit(1)
 
-    # Initialize ChromaDB — one collection per provider key so providers with
+    # Initialize ChromaDB: one collection per provider key so providers with
     # different dimensions never collide (e.g. bge-m3=1024, text-embedding-3-large=3072).
     collection_name = Config.collection_name(provider.key)
     chroma_store = ChromaStore(
@@ -319,7 +319,7 @@ def main():
         # Default: show summary
         count = chroma_store.count()
         print(f"\n{'='*60}")
-        print(f" Obsidian Embeddings — Status")
+        print(f" Obsidian Embeddings: Status")
         print(f"{'='*60}")
         print(f"  Provider:      {provider.name}")
         print(f"  ChromaDB:      {Config.CHROMA_PERSIST_DIR}")

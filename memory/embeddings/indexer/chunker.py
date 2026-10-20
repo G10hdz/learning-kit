@@ -123,7 +123,7 @@ class TextChunker:
         self.heading_level = heading_level
         self.max_paragraph_words = max_paragraph_words
         self.min_chunk_words = min_chunk_words
-        # Hard character cap per chunk — guarantees every chunk stays under the
+        # Hard character cap per chunk: guarantees every chunk stays under the
         # embedding model's token limit (prevents oversized-input failures on
         # providers like OpenRouter/text-embedding-3-large).
         self.max_chars = max_chars
@@ -231,7 +231,7 @@ class TextChunker:
                     current_heading_level = level
                     current_lines = []
                 else:
-                    # Higher-level heading (#) — treat as part of current chunk
+                    # Higher-level heading (#): treat as part of current chunk
                     current_lines.append(line)
             else:
                 current_lines.append(line)

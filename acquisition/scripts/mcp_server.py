@@ -47,7 +47,7 @@ def _citation(src: dict, id_key: str = "citationId") -> str:
     if isinstance(start, (int, float)) and url and "t=" not in url:
         sep = "&" if "?" in url else "?"
         url = f"{url}{sep}t={int(start)}"
-    return f"{title} — {url}" if url else title
+    return f"{title}: {url}" if url else title
 
 
 @mcp.tool()

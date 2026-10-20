@@ -1,4 +1,4 @@
-# Learning systems registry — ejemplo público del patrón.
+# Learning systems registry: ejemplo público del patrón.
 # Los agentes consultan esto para saber qué sistemas existen, dónde vive
 # su estado y cómo accederlos. Es el equivalente de un agents.yaml para
 # el aprendizaje. No secrets aquí: credenciales en env de cada host.
@@ -87,7 +87,7 @@ systems:
     name: AI Coach
     stage: practice
     host: local
-    repo: (no incluido — coaching con estado personal)
+    repo: (no incluido; coaching con estado personal)
     access:
       files: state/, coaching/, bank/, docs/
       skills: vendor/interview-coach, vendor/storyteller
