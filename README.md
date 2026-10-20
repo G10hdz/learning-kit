@@ -1,5 +1,7 @@
 # learning-kit
 
+[English README](README.en.md)
+
 Sistema personal de aprendizaje operado por agentes, empaquetado en un solo
 repo para clonar, instalar e iterar. Los agentes no son el truco: son la
 tuberia. Cinco pisos conectados con piezas chicas y auditables en vez de una
